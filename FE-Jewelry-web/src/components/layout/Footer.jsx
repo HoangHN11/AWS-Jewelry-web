@@ -11,7 +11,7 @@ export default function Footer() {
           </p>
         </div>
         <div>
-          <h5 className="font-medium mb-2">Hỗ trợ</h5>
+          <h5 className="font-medium mb-2">Hỗ trợ 11</h5>
           <ul className="text-sm space-y-1 text-gray-600">
             <li>Chính sách bảo hành</li>
             <li>Chính sách đổi trả</li>
