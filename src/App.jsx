@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from './pages/about/AboutPage';
+import BookingPage from './pages/booking/BookingPage';
 
 import CollectionsPage from "./pages/collections/CollectionsPage";
 import CollectionDetailPage from "./pages/collections/CollectionDetailPage";
@@ -23,6 +24,7 @@ export default function App() {
           {/* <Route path="/" element={<HomePage />} /> */}
 
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/booking" element={<BookingPage />} />
 
           <Route path="/collections" element={<CollectionsPage />} />
           <Route path="/collections/:id" element={<CollectionDetailPage />} />
