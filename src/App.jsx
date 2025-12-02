@@ -9,7 +9,7 @@ import PrivacyPolicyPage from "./pages/policies/PrivacyPolicyPage";
 import WarrantyPolicyPage from "./pages/policies/WarrantyPolicyPage";
 import ShippingReturnPolicyPage from "./pages/policies/ShippingReturnPolicyPage";
 import ServicesPage from './pages/services/ServicesPage';
-
+import StoreLocatorPage from './pages/stores/StoreLocatorPage';
 
 const App = () => {
   return (
@@ -33,6 +33,7 @@ const App = () => {
           />
 
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/stores" element={<StoreLocatorPage />} />
 
         </Route>
       </Routes>
