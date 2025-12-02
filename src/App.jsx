@@ -5,6 +5,9 @@ import CollectionsPage from "./pages/collections/CollectionsPage";
 import CollectionDetailPage from "./pages/collections/CollectionDetailPage";
 import NewsListPage from './pages/news/NewsListPage'
 import NewsDetailPage from './pages/news/NewsDetailPage'
+import PrivacyPolicyPage from "./pages/policies/PrivacyPolicyPage";
+import WarrantyPolicyPage from "./pages/policies/WarrantyPolicyPage";
+import ShippingReturnPolicyPage from "./pages/policies/ShippingReturnPolicyPage";
 
 
 const App = () => {
@@ -20,6 +23,13 @@ const App = () => {
 
           <Route path="/news" element={<NewsListPage />} />
           <Route path="/news/:slug" element={<NewsDetailPage />} />
+
+          <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/policies/warranty" element={<WarrantyPolicyPage />} />
+          <Route
+            path="/policies/shipping"
+            element={<ShippingReturnPolicyPage />}
+          />
 
 
         </Route>
