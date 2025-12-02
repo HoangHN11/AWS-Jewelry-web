@@ -8,6 +8,7 @@ import NewsDetailPage from './pages/news/NewsDetailPage'
 import PrivacyPolicyPage from "./pages/policies/PrivacyPolicyPage";
 import WarrantyPolicyPage from "./pages/policies/WarrantyPolicyPage";
 import ShippingReturnPolicyPage from "./pages/policies/ShippingReturnPolicyPage";
+import ServicesPage from './pages/services/ServicesPage';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
             element={<ShippingReturnPolicyPage />}
           />
 
+          <Route path="/services" element={<ServicesPage />} />
 
         </Route>
       </Routes>
