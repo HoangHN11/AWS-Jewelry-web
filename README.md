@@ -1,7 +1,5 @@
 Lumiere — React + Tailwind demo (FE-Jewelry-web)
 
-test
-
 
 Quick start (Windows PowerShell):
 
