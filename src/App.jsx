@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/home/HomePage";
 
+import CartPage from "./pages/cart/CartPage";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
+
 import CollectionsPage from "./pages/collections/CollectionsPage";
 import CollectionDetailPage from "./pages/collections/CollectionDetailPage";
 import AboutPage from "./pages/about/AboutPage";
@@ -16,7 +19,8 @@ import ShippingReturnPolicyPage from "./pages/policies/ShippingReturnPolicyPage"
 import StoreLocatorPage from "./pages/stores/StoreLocatorPage";
 import ContactPage from "./pages/contact/ContactPage";
 import BookingPage from "./pages/booking/BookingPage";
-
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import CreateProduct from "./pages/admin/CreateProduct";
 
 export default function App() {
   return (
@@ -28,8 +32,6 @@ export default function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
 
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="/account/orders" element={<OrderHistoryPage />} />
 
           <Route path="/collections" element={<CollectionsPage />} />
           <Route path="/collections/:id" element={<CollectionDetailPage />} />
@@ -53,7 +55,8 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/booking" element={<BookingPage />} />
 
-
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/create-product" element={<CreateProduct />} />
         </Route>
       </Routes>
     </BrowserRouter>
