@@ -12,9 +12,19 @@ export default function CreateProduct() {
 
     const [errors, setErrors] = useState({});
 
+    const [imagePreview, setImagePreview] = useState(null);
+
     const [sizes, setSizes] = useState([
         { id: uuidv4(), sizeId: uuidv4(), price: "", quantity: "", isActive: true },
     ]);
+
+    const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (err) => reject(err);
+        });
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,6 +33,21 @@ export default function CreateProduct() {
 
     const handleCheck = (e) => {
         setForm({ ...form, [e.target.name]: e.target.checked });
+    };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const base64 = await toBase64(file);
+
+        setForm({
+            ...form,
+            image: base64,
+        });
+
+        setImagePreview(URL.createObjectURL(file));
+        setErrors({ ...errors, image: "" });
     };
 
     const updateSize = (index, field, value) => {
@@ -42,9 +67,8 @@ export default function CreateProduct() {
         let newErrors = {};
 
         if (!form.name.trim()) newErrors.name = "Tên sản phẩm là bắt buộc";
-        if (!form.description.trim())
-            newErrors.description = "Mô tả sản phẩm là bắt buộc";
-        if (!form.image.trim()) newErrors.image = "Vui lòng nhập URL hình ảnh";
+        if (!form.description.trim()) newErrors.description = "Mô tả sản phẩm là bắt buộc";
+        if (!form.image) newErrors.image = "Vui lòng chọn hình ảnh";
 
         sizes.forEach((s, idx) => {
             if (!s.price) newErrors[`price_${idx}`] = "Giá bắt buộc";
@@ -81,11 +105,10 @@ export default function CreateProduct() {
         <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded">
             <h2 className="text-xl font-semibold mb-6">Tạo sản phẩm mới</h2>
 
-            {/* --- FORM 2 COLUMN --- */}
             <div className="grid grid-cols-2 gap-6">
                 {/* NAME */}
                 <div>
-                    <label className="block font-medium">Tên sản phẩm *</label>
+                    <label className="block font-medium">Tên sản phẩm <span className="text-red-600">*</span></label>
                     <input
                         name="name"
                         value={form.name}
@@ -100,26 +123,33 @@ export default function CreateProduct() {
                     </div>
                 </div>
 
-                {/* IMAGE */}
+                {/* IMAGE UPLOAD */}
                 <div>
-                    <label className="block font-medium">Ảnh sản phẩm (URL) *</label>
+                    <label className="block font-medium">Ảnh sản phẩm <span className="text-red-600">*</span></label>
                     <input
-                        name="image"
-                        value={form.image}
-                        onChange={handleChange}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
                         className="w-full border p-2 rounded mt-1"
-                        placeholder="https://image.jpg"
                     />
                     <div className="min-h-[20px]">
                         {errors.image && (
                             <p className="text-red-500 text-sm">{errors.image}</p>
                         )}
                     </div>
+
+                    {imagePreview && (
+                        <img
+                            src={imagePreview}
+                            alt="preview"
+                            className="h-24 mt-2 rounded border"
+                        />
+                    )}
                 </div>
 
                 {/* DESCRIPTION */}
                 <div className="col-span-2">
-                    <label className="block font-medium">Mô tả *</label>
+                    <label className="block font-medium">Mô tả <span className="text-red-600">*</span></label>
                     <textarea
                         name="description"
                         value={form.description}
@@ -146,28 +176,18 @@ export default function CreateProduct() {
                     />
                     Sản phẩm mới
                 </label>
-
-                <label className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        name="isActive"
-                        checked={form.isActive}
-                        onChange={handleCheck}
-                    />
-                    Đang hoạt động
-                </label>
             </div>
 
             {/* SIZES */}
             <div className="mt-8">
-                <h3 className="font-medium mb-3">Kích thước & Giá *</h3>
+                <h3 className="font-medium mb-3">Kích thước & Giá <span className="text-red-600">*</span></h3>
 
                 {sizes.map((s, index) => (
                     <div key={s.id} className="border p-4 rounded mb-4 bg-gray-50">
                         <div className="grid grid-cols-2 gap-4">
                             {/* Price */}
                             <div>
-                                <label className="font-medium block">Giá *</label>
+                                <label className="font-medium block">Giá <span className="text-red-600">*</span></label>
                                 <input
                                     type="number"
                                     className="w-full border p-2 rounded mt-1"
@@ -188,7 +208,7 @@ export default function CreateProduct() {
 
                             {/* Quantity */}
                             <div>
-                                <label className="font-medium block">Số lượng *</label>
+                                <label className="font-medium block">Số lượng <span className="text-red-600">*</span></label>
                                 <input
                                     type="number"
                                     className="w-full border p-2 rounded mt-1"
