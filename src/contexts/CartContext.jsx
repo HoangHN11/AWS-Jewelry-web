@@ -12,11 +12,16 @@ export function CartProvider({ children }) {
     }
   });
 
+  // Lưu vào localStorage khi cart thay đổi
   useEffect(() => {
     localStorage.setItem("lumiere_cart", JSON.stringify(cart));
   }, [cart]);
 
+  // ➤ ADD ITEM
   function addItem(product, qty = 1) {
+    const firstSize = product.productSizes?.[0] || {};
+    const price = firstSize.price || 0;
+
     setCart((prev) => {
       const found = prev.find((p) => p.id === product.id);
       if (found) {
@@ -24,26 +29,42 @@ export function CartProvider({ children }) {
           p.id === product.id ? { ...p, qty: p.qty + qty } : p
         );
       }
-      return [...prev, { ...product, qty }];
+
+      // Lưu 1 bản product tối giản + extra price
+      return [...prev, {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price,
+        qty
+      }];
     });
   }
 
+  // ➤ UPDATE QTY
   function updateQty(id, qty) {
     setCart((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, qty: Math.max(1, qty) } : p))
+      prev.map((p) =>
+        p.id === id ? { ...p, qty: Math.max(1, qty) } : p
+      )
     );
   }
 
+  // ➤ REMOVE ITEM
   function removeItem(id) {
     setCart((prev) => prev.filter((p) => p.id !== id));
   }
 
+  // ➤ CLEAR CART
   function clearCart() {
     setCart([]);
   }
 
+  // ➤ Total items
   const totalCount = cart.reduce((s, i) => s + i.qty, 0);
-  const totalPrice = cart.reduce((s, i) => s + (i.price || 0) * i.qty, 0);
+
+  // ➤ Total price
+  const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   return (
     <CartContext.Provider

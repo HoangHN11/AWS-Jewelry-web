@@ -11,17 +11,20 @@ export default function ProductDetailPage() {
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
 
+  // Lấy giá và quantity từ size đầu tiên (tạm thời)
+  const firstSize = product.productSizes?.[0] || {};
+  const price = firstSize.price || 0;
+  const stock = firstSize.quantity || 0;
+
+  // Sản phẩm liên quan: dựa vào vài ký tự đầu của name
   const related = products
-    .filter(
-      (p) =>
-        (p.category === product.category || p.material === product.material) &&
-        p.id !== product.id
-    )
+    .filter((p) => p.id !== product.id && p.name.slice(0, 3) === product.name.slice(0, 3))
     .slice(0, 4);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* LEFT IMAGE */}
         <div className="bg-white rounded-2xl overflow-hidden shadow p-4">
           <img
             src={product.image}
@@ -29,17 +32,23 @@ export default function ProductDetailPage() {
             className="w-full h-96 object-cover rounded"
           />
         </div>
+
+        {/* RIGHT DETAILS */}
         <div>
           <h1 className="text-3xl font-serif mb-2">{product.name}</h1>
+
           <div className="text-gold text-2xl font-semibold mb-3">
-            {(product.price / 1000000).toFixed(2)}M ₫
+            {(price / 1000000).toFixed(2)}M ₫
           </div>
-          <p className="text-sm text-gray-500">
-            SKU: {product.sku} • Category: {product.category}
-          </p>
+
           <p className="mt-4 text-gray-700">
-            Material: {product.material} • Stock: {product.stock}
+            Tình trạng:{" "}
+            <span className={stock > 0 ? "text-green-600" : "text-red-500"}>
+              {stock > 0 ? `Còn ${stock} sản phẩm` : "Hết hàng"}
+            </span>
           </p>
+
+          {/* Quantity + Add to cart */}
           <div className="mt-6 flex items-center gap-4">
             <div className="flex items-center bg-gray-100 rounded-lg p-1 w-fit">
               <button
@@ -56,14 +65,14 @@ export default function ProductDetailPage() {
                 +
               </button>
             </div>
+
             <button
               className="px-6 py-2 bg-gold text-black rounded font-medium hover:bg-yellow-500 transition"
-              onClick={() => {
-                addItem(product, qty)
-              }}
+              onClick={() => addItem(product, qty)}
             >
               Thêm vào giỏ
             </button>
+
             <Link
               to="/checkout"
               className="px-6 py-2 border-2 border-gray-300 rounded font-medium hover:border-gold hover:text-gold transition"
@@ -72,16 +81,15 @@ export default function ProductDetailPage() {
             </Link>
           </div>
 
+          {/* DESCRIPTION */}
           <div className="mt-8">
             <h3 className="font-medium mb-2">Mô tả</h3>
-            <p className="text-gray-600">
-              Đây là mô tả chi tiết cho sản phẩm. Chất liệu cao cấp, chế tác
-              tinh xảo, phù hợp cho những dịp đặc biệt.
-            </p>
+            <p className="text-gray-600">{product.description}</p>
           </div>
         </div>
       </div>
 
+      {/* RELATED PRODUCTS */}
       <section className="mt-12">
         <h3 className="text-xl font-semibold mb-4">Sản phẩm liên quan</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
