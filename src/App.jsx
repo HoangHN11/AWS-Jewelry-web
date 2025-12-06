@@ -26,11 +26,14 @@ import CreateProduct from "./pages/admin/CreateProduct";
 import AuthPage from "./pages/auth/AuthPage";
 import { CartProvider } from "./contexts/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
+import AdminRedirectGuard from "./components/AdminRedirectGuard";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <AdminRedirectGuard />
       <CartProvider>
         <Routes>
           <Route element={<MainLayout />}>
@@ -67,8 +70,15 @@ export default function App() {
             <Route path="/booking" element={<BookingPage />} />
 
             <Route path="/auth" element={<AuthPage />} />
+            {/* Admin-only routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/create-product" element={<CreateProduct />} />
+            <Route path="/admin/not-found" element={<NotFoundPage />} />
+            <Route path="/admin/*" element={<NotFoundPage />} />
+
+            {/* Shared not-found routes */}
+            <Route path="/not-found" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </CartProvider>
