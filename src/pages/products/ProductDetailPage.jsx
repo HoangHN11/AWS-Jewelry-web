@@ -67,7 +67,7 @@ export default function ProductDetailPage() {
           <h1 className="text-3xl font-serif mb-2">{product.name}</h1>
 
           <div className="text-gold text-2xl font-semibold mb-3">
-            {(price / 1_000_000).toFixed(2)}M ₫
+            {(price).toFixed(2)}₫
           </div>
 
           <p className="mt-4 text-gray-700">
