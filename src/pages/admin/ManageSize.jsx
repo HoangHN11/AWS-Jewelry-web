@@ -45,20 +45,24 @@ export default function ManageSizes() {
             console.log("SIZE UPDATED:", form);
             alert("Cập nhật kích thước thành công! Xem console.");
         } else {
-            // Create
-            const newSize = {
-                id: uuidv4(),
-                ...form,
-                isActive: true,
-                createAt: now,
-                updateAt: null,
-                deleteAt: null,
-            };
-            const response = await api.post('/size', newSize);
-            console.log(response);
-            setSizes([newSize, ...sizes]);
-            console.log("SIZE CREATED:", newSize);
-            alert("Tạo kích thước thành công! Xem console.");
+            try {
+                // Create
+                const newSize = {
+                    id: uuidv4(),
+                    ...form,
+                    isActive: true,
+                    createAt: now,
+                    updateAt: null,
+                    deleteAt: null,
+                };
+                const response = await api.post('/size', newSize);
+                console.log(response);
+                setSizes([newSize, ...sizes]);
+                console.log("SIZE CREATED:", newSize);
+                alert("Tạo kích thước thành công! Xem console.");
+            } catch (error) {
+                console.log(error);
+            }
         }
         closeModal();
     };

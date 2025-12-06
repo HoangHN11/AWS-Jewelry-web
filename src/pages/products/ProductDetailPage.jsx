@@ -1,24 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import products from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 import { useCart } from "../../contexts/CartContext";
 import ReviewSection from "./ReviewSection";
+import api from "../../services/axios";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id) || products[0];
   const { addItem } = useCart();
+
+  const [product, setProduct] = useState(null);
+  const [allProducts, setAllProducts] = useState([]);
   const [qty, setQty] = useState(1);
 
-  // Lấy giá và quantity từ size đầu tiên (tạm thời)
+  // Load product detail
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const response = await api.get(`/product/${id}`);
+        setProduct(response.data.data);
+      } catch (err) {
+        console.error("Lỗi load product:", err);
+      }
+    };
+    getProduct();
+  }, [id]);
+
+  useEffect(() => {
+    try {
+      api.get("/product").then((res) => {
+        console.log(res)
+        setAllProducts(res.data.data.items);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  if (!product) {
+    return <div className="text-center py-20">Đang tải sản phẩm...</div>;
+  }
+
   const firstSize = product.productSizes?.[0] || {};
   const price = firstSize.price || 0;
   const stock = firstSize.quantity || 0;
 
-  // Sản phẩm liên quan: dựa vào vài ký tự đầu của name
-  const related = products
-    .filter((p) => p.id !== product.id && p.name.slice(0, 3) === product.name.slice(0, 3))
+  // Related products
+  const related = allProducts
+    .filter((p) => p.id !== product.id && p.name?.slice(0, 3) === product.name?.slice(0, 3))
     .slice(0, 4);
 
   return (
@@ -38,7 +67,7 @@ export default function ProductDetailPage() {
           <h1 className="text-3xl font-serif mb-2">{product.name}</h1>
 
           <div className="text-gold text-2xl font-semibold mb-3">
-            {(price / 1000000).toFixed(2)}M ₫
+            {(price / 1_000_000).toFixed(2)}M ₫
           </div>
 
           <p className="mt-4 text-gray-700">
@@ -93,13 +122,15 @@ export default function ProductDetailPage() {
       <section className="mt-12">
         <h3 className="text-xl font-semibold mb-4">Sản phẩm liên quan</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {related.map((r) => (
+          {related.length > 0 ? related.map((r) => (
             <ProductCard key={r.id} product={r} />
-          ))}
+          )) : (
+            <div>Chưa có sản phẩm liên quan</div>
+          )}
         </div>
       </section>
 
-      <ReviewSection />
+      <ReviewSection productId={id} />
     </div>
   );
 }

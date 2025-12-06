@@ -13,12 +13,14 @@ export default function ProductsPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await api.get("/product");
-      setProducts(response.data.data.items)
+    try {
+      api.get("/products").then((res) => {
+        setProducts(res.data.data.items)
+      })
+    } catch (error) {
+      console.log(error);
     }
-    getProducts();
-  }, [])
+  }, []);
 
   const productsFilters = useMemo(() => {
     return products.filter((p) => {
