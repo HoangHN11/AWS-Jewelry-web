@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import productsData from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 import FilterSidebar from "../../components/FilterSidebar";
+import api from "../../services/axios";
 
 export default function ProductsPage() {
   const [filters, setFilters] = useState({
@@ -9,9 +10,18 @@ export default function ProductsPage() {
     material: new Set(),
     priceRange: "",
   });
+  const [products, setProducts] = useState([]);
 
-  const products = useMemo(() => {
-    return productsData.filter((p) => {
+  useEffect(() => {
+    const getProducts = async () => {
+      const response = await api.get("/product");
+      setProducts(response.data.data.items)
+    }
+    getProducts();
+  }, [])
+
+  const productsFilters = useMemo(() => {
+    return products.filter((p) => {
       if (filters.category.size && !filters.category.has(p.category))
         return false;
       if (filters.material.size && !filters.material.has(p.material))
@@ -24,7 +34,7 @@ export default function ProductsPage() {
       }
       return true;
     });
-  }, [filters]);
+  }, [filters, products]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -33,7 +43,7 @@ export default function ProductsPage() {
       </div>
       <div className="md:col-span-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((p) => (
+          {productsFilters.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>

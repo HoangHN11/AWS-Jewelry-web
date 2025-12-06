@@ -28,6 +28,7 @@ import { CartProvider } from "./contexts/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
 import AdminRedirectGuard from "./components/AdminRedirectGuard";
 import NotFoundPage from "./pages/NotFoundPage";
+import ManageSizePage from "./pages/admin/ManageSize";
 
 export default function App() {
   return (
@@ -73,6 +74,7 @@ export default function App() {
             {/* Admin-only routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/create-product" element={<CreateProduct />} />
+            <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
             <Route path="/admin/not-found" element={<NotFoundPage />} />
             <Route path="/admin/*" element={<NotFoundPage />} />
 
