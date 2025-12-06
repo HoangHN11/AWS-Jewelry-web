@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 export default function ProductCard({ product }) {
   const mainSize = product.productSizes?.[0] || {};
-  const price = mainSize.price || 0;
-  const quantity = mainSize.quantity || 0;
+  const price = product.price || 0;
+  const quantity = product.quantity || 0;
 
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transform hover:scale-105 transition p-3">
@@ -21,7 +21,7 @@ export default function ProductCard({ product }) {
         </div>
         <p className="text-sm text-gray-500 mt-1">Quantity: {quantity}</p>
         <div className="mt-3 flex items-center justify-between">
-          <div className="text-lg font-semibold">{(price / 1000000).toFixed(2)}M ₫</div>
+          <div className="text-lg font-semibold">{(price).toFixed(2)}₫</div>
           <Link to={`/products/${product.id}`} className="text-sm text-gold">Xem chi tiết</Link>
         </div>
       </div>
