@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import api from "/../services/axios";
+import api from "../services/axios";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
