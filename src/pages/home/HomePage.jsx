@@ -1,10 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import products from "../../data/products";
 import ProductCard from "../../components/ProductCard";
+import api from "../../services/axios";
 
 export default function HomePage() {
   const featured = products.slice(0, 4);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const code = params.get("code");
+
+    if (!code) return; // Không có code → không làm gì
+
+    const exchangeCode = async () => {
+      try {
+        const clientId = "2du254ol9r1fl044tsuchsi20m";
+
+        // Gọi BE để đổi code lấy token
+        const response = await api.post("/auth/token", {
+          client_id: clientId,
+          code,
+        });
+
+        const { id_token, access_token, refresh_token } = response.data.data;
+
+        // Lưu token
+        localStorage.setItem("token", access_token);
+
+        // Lấy user info từ BE
+        const userRes = await api.get("/auth/userinfo");
+        console.log("User info:", userRes.data);
+
+        // ➜ Có thể lưu user info vào localStorage hoặc Redux tại đây
+        // localStorage.setItem("user", JSON.stringify(userRes.data))
+
+        // Xóa param ?code= khỏi URL
+        navigate("/", { replace: true });
+
+      } catch (err) {
+        console.error("Error exchanging code:", err);
+        alert("Đăng nhập thất bại!");
+        navigate("/", { replace: true });
+      }
+    };
+
+    exchangeCode();
+  }, [location, navigate]);
+
   return (
     <div>
       <section className="relative h-[60vh] flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-transparent text-gray-900">

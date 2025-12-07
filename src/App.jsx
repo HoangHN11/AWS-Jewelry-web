@@ -32,6 +32,7 @@ import ManageSizePage from "./pages/admin/ManageSize";
 import ManageProductsPage from "./pages/admin/ManageProduct";
 import UpsertAccount from "./pages/admin/UpsertAccount";
 import ManageAccounts from "./pages/admin/ManageAccount";
+import AuthCallback from "./components/AuthCallback";
 
 export default function App() {
   return (
@@ -44,6 +45,8 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/products/:id" element={<ProductDetailPage />} />
+
+            {/* <Route path="/?code=:code" element={<AuthCallback />} /> */}
 
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
