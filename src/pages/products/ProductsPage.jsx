@@ -14,7 +14,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     try {
-      api.get("/products").then((res) => {
+      api.get("/product").then((res) => {
         setProducts(res.data.data.items)
       })
     } catch (error) {

@@ -9,7 +9,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await api.get("/api/userinfo");
+        const response = await api.get("/auth/userinfo");
         setUser(response.data.data);
       } catch (error) {
         console.error("Error fetching user:", error);
