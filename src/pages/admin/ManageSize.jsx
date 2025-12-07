@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import api from "../../services/axios";
 
 export default function ManageSizes() {
@@ -7,15 +6,25 @@ export default function ManageSizes() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form, setForm] = useState({ id: null, label: "", isActive: true });
     const [errors, setErrors] = useState({});
+    const [page, setPage] = useState(1);
+    const [pageSize] = useState(10);
+    const [total, setTotal] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+
+    const fetchSizes = async () => {
+        try {
+            const res = await api.get(`/size?page=${page}&size=${pageSize}`);
+            setSizes(res.data.data.items);
+            setTotal(res.data.data.total);
+            setTotalPages(res.data.data.totalPages);
+        } catch (error) {
+            console.error("Error fetching sizes:", error);
+        }
+    };
 
     useEffect(() => {
-        const getSize = async () => {
-            const size = await api.get("/size");
-            console.log(size)
-            setSizes(size.data.data.items)
-        }
-        getSize();
-    }, [])
+        fetchSizes();
+    }, [page]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -35,47 +44,38 @@ export default function ManageSizes() {
 
     const upsertSize = async () => {
         if (!validate()) return;
-        const now = new Date().toISOString();
-        if (form.id) {
-            // Update
-            const updatedSizes = sizes.map((s) =>
-                s.id === form.id ? { ...s, ...form, updateAt: now } : s
-            );
-            setSizes(updatedSizes);
-            console.log("SIZE UPDATED:", form);
-            alert("Cập nhật kích thước thành công! Xem console.");
-        } else {
-            try {
+        try {
+            if (form.id) {
+                // Update
+                await api.put(`/size/${form.id}`, form);
+                alert("Cập nhật kích thước thành công!");
+            } else {
                 // Create
                 const newSize = {
-                    id: uuidv4(),
-                    ...form,
+                    label: form.label,
                     isActive: true,
-                    createAt: now,
-                    updateAt: null,
-                    deleteAt: null,
                 };
-                const response = await api.post('/size', newSize);
-                console.log(response);
-                setSizes([newSize, ...sizes]);
-                console.log("SIZE CREATED:", newSize);
-                alert("Tạo kích thước thành công! Xem console.");
-            } catch (error) {
-                console.log(error);
+                await api.post('/size', newSize);
+                alert("Tạo kích thước thành công!");
             }
+            fetchSizes();
+            closeModal();
+        } catch (error) {
+            console.error("Error upserting size:", error);
+            alert("Có lỗi xảy ra!");
         }
-        closeModal();
     };
 
-    const deleteSize = (id) => {
+    const deleteSize = async (id) => {
         if (!window.confirm("Bạn chắc chắn muốn xóa kích thước này?")) return;
-        const now = new Date().toISOString();
-        const updatedSizes = sizes.map((s) =>
-            s.id === id ? { ...s, deleteAt: now, isActive: false } : s
-        );
-        setSizes(updatedSizes);
-        console.log("SIZE DELETED (soft):", id);
-        alert("Xóa kích thước thành công (soft delete)! Xem console.");
+        try {
+            await api.delete(`/size/${id}`);
+            alert("Xóa kích thước thành công!");
+            fetchSizes();
+        } catch (error) {
+            console.error("Error deleting size:", error);
+            alert("Có lỗi xảy ra!");
+        }
     };
 
     const openModalForCreate = () => {
@@ -94,7 +94,13 @@ export default function ManageSizes() {
         setIsModalOpen(false);
     };
 
-    const activeSizes = sizes.filter((s) => !s.deleteAt);
+    const handlePrevPage = () => {
+        if (page > 1) setPage(page - 1);
+    };
+
+    const handleNextPage = () => {
+        if (page < totalPages) setPage(page + 1);
+    };
 
     return (
         <div className="mx-auto p-6 bg-white shadow-lg rounded-lg">
@@ -119,12 +125,12 @@ export default function ManageSizes() {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {activeSizes.length === 0 ? (
+                        {sizes.length === 0 ? (
                             <tr>
                                 <td colSpan="3" className="px-6 py-4 text-center text-gray-500">Chưa có kích thước nào</td>
                             </tr>
                         ) : (
-                            activeSizes.map((size) => (
+                            sizes.map((size) => (
                                 <tr key={size.id} className="hover:bg-gray-50 transition">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{size.label}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -153,6 +159,27 @@ export default function ManageSizes() {
                         )}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-between items-center mt-4">
+                <button
+                    onClick={handlePrevPage}
+                    disabled={page === 1}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md disabled:opacity-50 hover:bg-gray-300 transition"
+                >
+                    Trước
+                </button>
+                <span className="text-sm text-gray-700">
+                    Trang {page} / {totalPages} (Tổng: {total})
+                </span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={page === totalPages}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md disabled:opacity-50 hover:bg-gray-300 transition"
+                >
+                    Sau
+                </button>
             </div>
 
             {/* Modal for Upsert */}

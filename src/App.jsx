@@ -30,6 +30,8 @@ import AdminRedirectGuard from "./components/AdminRedirectGuard";
 import NotFoundPage from "./pages/NotFoundPage";
 import ManageSizePage from "./pages/admin/ManageSize";
 import ManageProductsPage from "./pages/admin/ManageProduct";
+import UpsertAccount from "./pages/admin/UpsertAccount";
+import ManageAccounts from "./pages/admin/ManageAccount";
 
 export default function App() {
   return (
@@ -75,8 +77,12 @@ export default function App() {
             {/* Admin-only routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/create-product" element={<CreateProduct />} />
+            <Route path="/admin/update-product/:id" element={<CreateProduct />} />
             <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
             <Route path="/admin/manage-products" element={<ManageProductsPage />} />
+            <Route path="/admin/manage-accounts" element={<ManageAccounts />} />
+            <Route path="/admin/create-account" element={<UpsertAccount />} />
+            <Route path="/admin/update-account/:id" element={<UpsertAccount />} />
             <Route path="/admin/not-found" element={<NotFoundPage />} />
             <Route path="/admin/*" element={<NotFoundPage />} />
 
