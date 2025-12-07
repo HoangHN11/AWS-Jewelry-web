@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import api from "../../services/axios"; // Assuming this is your axios instance
+import api from "../services/axios";
 
 export default function AuthCallback() {
     const location = useLocation();
