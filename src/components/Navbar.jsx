@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import api from "../../services/axios";
+import api from "/../services/axios";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function Navbar() {
     const fetchUser = async () => {
       try {
         const response = await api.get("/auth/userinfo");
-        setUser(response.data.data); // Assuming data.data has user info like { email, fullName, etc }
+        setUser(response.data.data);
       } catch (error) {
         console.error("Error fetching user:", error);
         setUser(null);
