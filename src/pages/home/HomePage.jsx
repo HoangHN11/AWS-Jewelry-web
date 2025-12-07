@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import products from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 import api from "../../services/axios";
+import { AuthContext } from "../../contexts/AuthContext";
+
 
 export default function HomePage() {
   const featured = products.slice(0, 4);
+  const { loadUser } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -14,13 +17,12 @@ export default function HomePage() {
     const params = new URLSearchParams(location.search);
     const code = params.get("code");
 
-    if (!code) return; // Không có code → không làm gì
+    if (!code) return;
 
     const exchangeCode = async () => {
       try {
         const clientId = "2du254ol9r1fl044tsuchsi20m";
 
-        // Gọi BE để đổi code lấy token
         const response = await api.post("/auth/token", {
           client_id: clientId,
           code,
@@ -31,12 +33,8 @@ export default function HomePage() {
         // Lưu token
         localStorage.setItem("token", access_token);
 
-        // Lấy user info từ BE
-        const userRes = await api.get("/auth/userinfo");
-        console.log("User info:", userRes.data);
 
-        // ➜ Có thể lưu user info vào localStorage hoặc Redux tại đây
-        // localStorage.setItem("user", JSON.stringify(userRes.data))
+        await loadUser();
 
         // Xóa param ?code= khỏi URL
         navigate("/", { replace: true });

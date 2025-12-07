@@ -1,31 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import api from "../services/axios";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(AuthContext);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await api.get("/auth/userinfo");
-        setUser(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-        setUser(null);
-      }
-    };
-
-    if (localStorage.getItem("token")) {
-      fetchUser();
-    }
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    // Optionally call BE logout if needed
   };
 
   return (
@@ -139,15 +124,72 @@ export default function Navbar() {
             </svg>
           </button>
           {user ? (
-            <div className="flex items-center gap-2">
-              <span>Xin chào, {user.fullName || user.email}</span>
-              <button onClick={handleLogout}>Đăng xuất</button>
+            <div className="relative">
+              <button
+                onClick={() => setOpenUserMenu(prev => !prev)}
+                className="flex items-center gap-2"
+              >
+                <img
+                  src="https://ui-avatars.com/api/?name=Lumiere&background=ddd&size=32"
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full border"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown menu */}
+              {openUserMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border py-2 animate-fadeIn z-50">
+                  <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                    <p className="font-medium truncate">{user.fullName || user.email}</p>
+                  </div>
+
+                  <Link
+                    to="/account"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Tài khoản
+                  </Link>
+
+                  <Link
+                    to="/orders"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Đơn hàng
+                  </Link>
+
+                  <Link
+                    to="/settings"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Cài đặt
+                  </Link>
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    Đăng xuất
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <Link to="https://ap-southeast-1ucrmlooxh.auth.ap-southeast-1.amazoncognito.com/login?client_id=2du254ol9r1fl044tsuchsi20m&redirect_uri=https%3A%2F%2Faws-jewelry-web.vercel.app%2F&response_type=code&scope=email+openid+phone">
-              <button>Đăng nhập</button>
+              <button className="px-4 py-2 border rounded-lg hover:bg-gray-100 transition">
+                Đăng nhập
+              </button>
             </Link>
           )}
+
         </div>
       </div>
       {open && (
@@ -164,7 +206,7 @@ export default function Navbar() {
             <NavLink to="/cart">Giỏ hàng</NavLink>
             {user ? (
               <>
-                <span>Xin chào, {user.fullName || user.email}</span>
+                <span>Xin chào, {user.email}</span>
                 <button onClick={handleLogout}>Đăng xuất</button>
               </>
             ) : (
