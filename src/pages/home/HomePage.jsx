@@ -21,7 +21,7 @@ export default function HomePage() {
         const clientId = "2du254ol9r1fl044tsuchsi20m";
 
         // Gọi BE để đổi code lấy token
-        const response = await api.post("/auth/token", {
+        const response = await api.post("/api/token", {
           client_id: clientId,
           code,
         });
@@ -32,7 +32,7 @@ export default function HomePage() {
         localStorage.setItem("token", access_token);
 
         // Lấy user info từ BE
-        const userRes = await api.get("/auth/userinfo");
+        const userRes = await api.get("/api/userinfo");
         console.log("User info:", userRes.data);
 
         // ➜ Có thể lưu user info vào localStorage hoặc Redux tại đây
