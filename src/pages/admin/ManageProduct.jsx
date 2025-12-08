@@ -173,7 +173,7 @@ export default function ManageProductsPage() {
                                                                                 className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                                                                                 onClick={async () => {
                                                                                     try {
-                                                                                        await api.put(`/product-size/${s.id}`, {
+                                                                                        await api.put(`/product/${product.id}/sizes/${s.id}`, {
                                                                                             price: Number(s._editPrice ?? s.price),
                                                                                             quantity: Number(s._editQty ?? s.quantity)
                                                                                         });
@@ -196,7 +196,7 @@ export default function ManageProductsPage() {
                                                                                     if (!window.confirm("Xóa size này?")) return;
 
                                                                                     try {
-                                                                                        await api.delete(`/product-size/${s.id}`);
+                                                                                        await api.delete(`/product/${product.id}/sizes/${s.id}`);
                                                                                         alert("Đã xóa size!");
                                                                                         fetchSizes(s.productId);
                                                                                     } catch (e) {
@@ -235,7 +235,7 @@ export default function ManageProductsPage() {
                                                         <option value="">-- Chọn size --</option>
                                                         {sizesMaster.map((s) => (
                                                             <option key={s.id} value={s.id}>
-                                                                {s.name}
+                                                                {s.label}
                                                             </option>
                                                         ))}
                                                     </select>
