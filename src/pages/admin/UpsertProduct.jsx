@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpsertProduct() {
     const { id } = useParams();
@@ -11,6 +11,8 @@ export default function UpsertProduct() {
         isNew: false,
         isActive: true,
     });
+
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
 
@@ -91,11 +93,13 @@ export default function UpsertProduct() {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Cập nhật sản phẩm thành công!");
+                navigate('/admin/manage-products')
             } else {
                 await api.post("/product", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
                 alert("Tạo sản phẩm thành công!");
+                navigate('/admin/manage-products')
             }
         } catch (err) {
             console.error("Error upserting product:", err);

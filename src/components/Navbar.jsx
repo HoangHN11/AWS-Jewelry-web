@@ -1,16 +1,18 @@
 import React, { useState, useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, setUser } = useContext(AuthContext);
   const [openUserMenu, setOpenUserMenu] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
+    navigate('/')
   };
 
   return (
