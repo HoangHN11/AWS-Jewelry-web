@@ -33,7 +33,7 @@ export default function ManageProductsPage() {
         setLoadingSizes(true);
         try {
             const res = await api.get(`/product/${productId}/sizes`);
-            setSizes(res.data.data || []);
+            setSizes(res.data.data.items || []);
         } catch (err) {
             console.error(err);
         }
