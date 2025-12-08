@@ -33,7 +33,8 @@ export default function ManageProductsPage() {
         setLoadingSizes(true);
         try {
             const res = await api.get(`/product/${productId}/sizes`);
-            setSizes(res.data.data.items || []);
+            setSizes(res.data.data || []);
+            console.log(res);
         } catch (err) {
             console.error(err);
         }
@@ -134,10 +135,9 @@ export default function ManageProductsPage() {
 
                                                     <tbody>
                                                         {sizes
-                                                            .filter((s) => s.isActive === true)
                                                             .map((s) => {
                                                                 const sizeName =
-                                                                    sizesMaster.find((x) => x.id === s.sizeId)?.label ||
+                                                                    sizesMaster.filter((s) => s.isActive).find((x) => x.id === s.sizeId)?.label ||
                                                                     s.sizeId;
 
                                                                 return (
