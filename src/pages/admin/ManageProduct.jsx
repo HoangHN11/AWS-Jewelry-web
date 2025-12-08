@@ -138,7 +138,7 @@ export default function ManageProductsPage() {
                                                             .map((s) => {
                                                                 const sizeName =
                                                                     sizesMaster.filter((s) => s.isActive).find((x) => x.id === s.id)?.label ||
-                                                                    s.id;
+                                                                    s.label;
 
                                                                 return (
                                                                     <tr key={s.id}>
