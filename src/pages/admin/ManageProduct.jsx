@@ -59,7 +59,7 @@ export default function ManageProductsPage() {
                             activeProducts.map((product) => (
                                 <tr key={product.id} className="hover:bg-gray-50 transition">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.image}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={product.image} alt={product.name} className="w-10 h-10" /></td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.price} đ</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{product.quantity}</td>
 

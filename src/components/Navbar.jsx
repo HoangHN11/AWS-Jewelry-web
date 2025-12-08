@@ -149,7 +149,8 @@ export default function Navbar() {
               {openUserMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border py-2 animate-fadeIn z-50">
                   <div className="px-4 py-2 text-sm text-gray-700 border-b">
-                    <p className="font-medium truncate">{user.fullName || user.email}</p>
+                    <p className="font-medium truncate">{user.email}</p>
+                    <p className="font-medium truncate">{user.fullname}</p>
                   </div>
 
                   <Link

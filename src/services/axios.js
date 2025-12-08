@@ -34,8 +34,8 @@ api.interceptors.response.use(
         console.error("API ERROR:", message);
 
         if (error.response?.status === 401) {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
+            // localStorage.removeItem("token");
+            // window.location.href = "https://ap-southeast-1ucrmlooxh.auth.ap-southeast-1.amazoncognito.com/login?client_id=2du254ol9r1fl044tsuchsi20m&redirect_uri=https%3A%2F%2Faws-jewelry-web.vercel.app%2F&response_type=code&scope=email+openid+phone";
         }
 
         return Promise.reject(error);

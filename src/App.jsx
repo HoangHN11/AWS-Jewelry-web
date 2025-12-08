@@ -22,7 +22,6 @@ import StoreLocatorPage from "./pages/stores/StoreLocatorPage";
 import ContactPage from "./pages/contact/ContactPage";
 import BookingPage from "./pages/booking/BookingPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import CreateProduct from "./pages/admin/CreateProduct";
 import AuthPage from "./pages/auth/AuthPage";
 import { CartProvider } from "./contexts/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
@@ -33,6 +32,7 @@ import ManageProductsPage from "./pages/admin/ManageProduct";
 import UpsertAccount from "./pages/admin/UpsertAccount";
 import ManageAccounts from "./pages/admin/ManageAccount";
 import { AuthProvider } from "./contexts/AuthContext";
+import UpsertProduct from "./pages/admin/UpsertProduct";
 
 export default function App() {
   return (
@@ -79,8 +79,8 @@ export default function App() {
               <Route path="/auth" element={<AuthPage />} />
               {/* Admin-only routes */}
               <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/create-product" element={<CreateProduct />} />
-              <Route path="/admin/update-product/:id" element={<CreateProduct />} />
+              <Route path="/admin/create-product" element={<UpsertProduct />} />
+              <Route path="/admin/update-product/:id" element={<UpsertProduct />} />
               <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
               <Route path="/admin/manage-products" element={<ManageProductsPage />} />
               <Route path="/admin/manage-accounts" element={<ManageAccounts />} />
