@@ -5,26 +5,26 @@ import { getUserFromLocalStorage } from "../utils";
 
 
 export default function AdminRedirectGuard() {
-    // const location = useLocation();
-    // const navigate = useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const user = getUserFromLocalStorage();
-    //     const path = location.pathname;
+    useEffect(() => {
+        const user = getUserFromLocalStorage();
+        const path = location.pathname;
 
-    //     const role = user?.role || user?.roles || user?.roleName;
-    //     const isAdmin = role === "admin" || (Array.isArray(role) && role.includes("admin"));
+        const role = user?.role || user?.roles || user?.roleName;
+        const isAdmin = role === "Admin" || (Array.isArray(role) && role.includes("Admin"));
 
-    //     if (isAdmin) {
-    //         if (!path.startsWith("/admin")) {
-    //             navigate("/admin/not-found", { replace: true });
-    //         }
-    //     } else {
-    //         if (path.startsWith("/admin")) {
-    //             navigate("/not-found", { replace: true });
-    //         }
-    //     }
-    // }, [location.pathname, navigate]);
+        if (isAdmin) {
+            if (!path.startsWith("/admin")) {
+                navigate("/admin/not-found", { replace: true });
+            }
+        } else {
+            if (path.startsWith("/admin")) {
+                navigate("/not-found", { replace: true });
+            }
+        }
+    }, [location.pathname, navigate]);
 
     return null;
 }

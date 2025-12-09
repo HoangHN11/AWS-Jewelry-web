@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api from "../../services/axios";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function ReviewSection({ productId }) {
     const [reviews, setReviews] = useState([]);
 
+    const { user } = useContext(AuthContext);
+
     const [newReview, setNewReview] = useState({
-        accountId: "current-user-id",
         rating: 5,
         content: "",
     });
@@ -26,6 +28,11 @@ export default function ReviewSection({ productId }) {
     const handleSubmitReview = (e) => {
         e.preventDefault();
 
+        if (!user) {
+            alert("Bạn cần đăng nhập để đánh giá sản phẩm!");
+            return;
+        }
+
         const newItem = {
             rating: newReview.rating,
             content: newReview.content,
@@ -35,7 +42,7 @@ export default function ReviewSection({ productId }) {
             console.log(res)
         })
 
-        setReviews([newItem, ...reviews]);
+        setReviews([res.data.data, ...reviews]);
         setNewReview({ accountId: "current-user-id", rating: 5, content: "" });
         setHoverRating(0);
     };
@@ -72,42 +79,49 @@ export default function ReviewSection({ productId }) {
             </div>
 
             {/* Add review */}
-            <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 p-4 rounded">
-                <label className="block mb-2 font-medium">Chọn số sao</label>
-
-                {/* ⭐⭐⭐⭐⭐ Rating with hover preview */}
-                <div className="flex gap-2 mb-4">
-                    {[1, 2, 3, 4, 5].map((star) => {
-                        const active = hoverRating
-                            ? star <= hoverRating
-                            : star <= newReview.rating;
-
-                        return (
-                            <span
-                                key={star}
-                                className={`text-3xl cursor-pointer transition 
-                                    ${active ? "text-yellow-400" : "text-gray-300 hover:text-yellow-200"}`}
-                                onMouseEnter={() => setHoverRating(star)}
-                                onMouseLeave={() => setHoverRating(0)}
-                                onClick={() => setNewReview({ ...newReview, rating: star })}
-                            >
-                                ★
-                            </span>
-                        );
-                    })}
+            {!user ? (
+                <div className="bg-red-100 text-red-700 p-4 rounded mb-6">
+                    Bạn cần <a href="/login" className="text-blue-600 underline">đăng nhập</a> để đánh giá sản phẩm.
                 </div>
+            ) : (
+                <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 p-4 rounded">
+                    <label className="block mb-2 font-medium">Chọn số sao</label>
 
-                <label className="block mb-2 font-medium">Nội dung đánh giá</label>
-                <textarea
-                    className="w-full border rounded p-2 mb-4"
-                    value={newReview.content}
-                    onChange={(e) =>
-                        setNewReview({ ...newReview, content: e.target.value })
-                    }
-                />
+                    <div className="flex gap-2 mb-4">
+                        {[1, 2, 3, 4, 5].map((star) => {
+                            const active = hoverRating
+                                ? star <= hoverRating
+                                : star <= newReview.rating;
 
-                <button className="bg-gold text-black font-semibold px-4 py-2 rounded">Gửi đánh giá</button>
-            </form>
+                            return (
+                                <span
+                                    key={star}
+                                    className={`text-3xl cursor-pointer transition 
+                                        ${active ? "text-yellow-400" : "text-gray-300 hover:text-yellow-200"}`}
+                                    onMouseEnter={() => setHoverRating(star)}
+                                    onMouseLeave={() => setHoverRating(0)}
+                                    onClick={() => setNewReview({ ...newReview, rating: star })}
+                                >
+                                    ★
+                                </span>
+                            );
+                        })}
+                    </div>
+
+                    <label className="block mb-2 font-medium">Nội dung đánh giá</label>
+                    <textarea
+                        className="w-full border rounded p-2 mb-4"
+                        value={newReview.content}
+                        onChange={(e) =>
+                            setNewReview({ ...newReview, content: e.target.value })
+                        }
+                    />
+
+                    <button className="bg-gold text-black font-semibold px-4 py-2 rounded">
+                        Gửi đánh giá
+                    </button>
+                </form>
+            )}
 
             {/* List */}
             {reviews.map((r) => (

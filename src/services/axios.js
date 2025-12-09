@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "https://autobrew.funnydev.id.vn/api/v1",
+    baseURL: import.meta.env.VITE_API_URL || "https://aws.funnydev.id.vn/api/v1",
     timeout: 15000,
     headers: {
         "Content-Type": "application/json",
