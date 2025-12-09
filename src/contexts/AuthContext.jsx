@@ -1,23 +1,32 @@
 import React, { createContext, useEffect, useState } from "react";
 import api from "../services/axios";
+import { getUserFromLocalStorage } from "../utils";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        return getUserFromLocalStorage();
+    });
 
     const loadUser = async () => {
         try {
-            if (!localStorage.getItem("token")) return;
+            const token = localStorage.getItem("token");
+            if (!token) return;
 
             const res = await api.get("/auth/userinfo");
-            setUser(res.data.data);
+            const userInfo = res.data.data;
+
+            localStorage.setItem("user", JSON.stringify(userInfo));
+
+            setUser(userInfo);
         } catch (e) {
+            console.error("Load user failed:", e);
+            localStorage.removeItem("user");
             setUser(null);
         }
     };
 
-    // Chạy 1 lần khi app load
     useEffect(() => {
         loadUser();
     }, []);

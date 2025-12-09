@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserFromLocalStorage } from "../utils";
+import { AuthContext } from "../contexts/AuthContext";
 
 
 
@@ -9,7 +10,7 @@ export default function AdminRedirectGuard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const user = getUserFromLocalStorage();
+        const { user } = useContext(AuthContext);
         const path = location.pathname;
 
         const role = user?.role || user?.roles || user?.roleName;

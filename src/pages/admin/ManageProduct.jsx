@@ -136,9 +136,8 @@ export default function ManageProductsPage() {
                                                     <tbody>
                                                         {sizes
                                                             .map((s) => {
-                                                                const sizeName =
-                                                                    sizesMaster.filter((s) => s.isActive).find((x) => x.id === s.id)?.label ||
-                                                                    s.label;
+                                                                const sizeName = s.size?.label || "N/A";
+
 
                                                                 return (
                                                                     <tr key={s.id}>
