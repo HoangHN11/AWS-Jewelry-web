@@ -58,6 +58,7 @@ export default function ProductDetailPage() {
 
   const related = allProducts
     .filter((p) => p.id !== product.id)
+    .filter((p) => p.sizes.length > 0)
     .slice(0, 4);
 
   return (

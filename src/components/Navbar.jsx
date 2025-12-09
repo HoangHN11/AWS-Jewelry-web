@@ -64,7 +64,6 @@ export default function Navbar() {
                   <Link to="/admin/create-product" className="block px-4 py-2 hover:bg-gray-100">Tạo sản phẩm</Link>
                   <Link to="/admin/manage-sizes" className="block px-4 py-2 hover:bg-gray-100">Quản lý size</Link>
                   <Link to="/admin/manage-accounts" className="block px-4 py-2 hover:bg-gray-100">Quản lý tài khoản</Link>
-                  <Link to="/admin/create-account" className="block px-4 py-2 hover:bg-gray-100">Tạo tài khoản</Link>
                 </div>
               )}
             </div>

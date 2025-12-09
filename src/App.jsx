@@ -33,6 +33,7 @@ import UpsertAccount from "./pages/admin/UpsertAccount";
 import ManageAccounts from "./pages/admin/ManageAccount";
 import { AuthProvider } from "./contexts/AuthContext";
 import UpsertProduct from "./pages/admin/UpsertProduct";
+import SettingsPage from "./pages/setting/Setting";
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
             <Routes>
               <Route element={<MainLayout />}>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/products/:id" element={<ProductDetailPage />} />
 

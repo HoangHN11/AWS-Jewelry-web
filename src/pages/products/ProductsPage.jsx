@@ -9,7 +9,9 @@ export default function ProductsPage() {
     category: new Set(),
     material: new Set(),
     priceRange: "",
+    rating: null,
   });
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -29,10 +31,11 @@ export default function ProductsPage() {
       if (filters.material.size && !filters.material.has(p.material))
         return false;
       if (filters.priceRange) {
-        const m = p.price / 1000000;
-        if (filters.priceRange === "<5" && !(m < 5)) return false;
-        if (filters.priceRange === "5-10" && !(m >= 5 && m <= 10)) return false;
-        if (filters.priceRange === ">10" && !(m > 10)) return false;
+        const m = p.price;
+        console.log(p)
+        if (filters.priceRange === "<1000000" && !(m < 1000000)) return false;
+        if (filters.priceRange === "1000000-5000000" && !(m >= 1000000 && m <= 5000000)) return false;
+        if (filters.priceRange === ">5000000" && !(m > 5000000)) return false;
       }
       return true;
     });

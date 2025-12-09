@@ -18,9 +18,9 @@ const news = [
     date: "2025-06-01",
     category: "Khuyến mãi",
     banner:
-      "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.birisjewelers.com/wp-content/uploads/2024/08/Tiffany-And-Company-jewerly-1.jpeg",
     image:
-      "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.birisjewelers.com/wp-content/uploads/2024/08/Tiffany-And-Company-jewerly-1.jpeg",
     excerpt: "Chương trình khuyến mãi mùa hè cho các mẫu chọn lọc.",
     content: `
   <p>Chào đón mùa hè 2025, chúng tôi mang đến chương trình <strong>khuyến mãi lớn nhất trong năm</strong> dành cho các mẫu trang sức được yêu thích nhất. Đây là dịp tuyệt vời để bạn làm mới bộ sưu tập của mình với mức giá vô cùng hấp dẫn.</p>
@@ -50,9 +50,9 @@ const news = [
     date: "2025-04-10",
     category: "Xu hướng",
     banner:
-      "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.birisjewelers.com/wp-content/uploads/2024/08/Harry-Winston-jewerly.jpeg",
     image:
-      "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.birisjewelers.com/wp-content/uploads/2024/08/Harry-Winston-jewerly.jpeg",
     excerpt: "Những mẫu được dự đoán sẽ lên ngôi trong 2025.",
     content: `
   <p>Chào đón mùa hè 2025, chúng tôi mang đến chương trình <strong>khuyến mãi lớn nhất trong năm</strong> dành cho các mẫu trang sức được yêu thích nhất. Đây là dịp tuyệt vời để bạn làm mới bộ sưu tập của mình với mức giá vô cùng hấp dẫn.</p>
