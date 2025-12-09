@@ -25,17 +25,6 @@ export default function ManageAccounts() {
         fetchAccounts();
     }, [page]);
 
-    const deleteAccount = async (id) => {
-        if (!window.confirm("Bạn chắc chắn muốn xóa tài khoản này?")) return;
-        try {
-            await api.delete(`/account/${id}`);
-            alert("Xóa tài khoản thành công!");
-            fetchAccounts();
-        } catch (error) {
-            console.error("Error deleting account:", error);
-            alert("Có lỗi xảy ra!");
-        }
-    };
 
     const handlePrevPage = () => {
         if (page > 1) setPage(page - 1);
@@ -89,12 +78,6 @@ export default function ManageAccounts() {
                                             className="text-blue-600 hover:text-blue-800 mr-4"
                                         >
                                             Sửa
-                                        </button>
-                                        <button
-                                            onClick={() => deleteAccount(account.id)}
-                                            className="text-red-600 hover:text-red-800"
-                                        >
-                                            Xóa
                                         </button>
                                     </td>
                                 </tr>

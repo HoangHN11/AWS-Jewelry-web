@@ -66,26 +66,9 @@ export default function ManageSizes() {
         }
     };
 
-    const deleteSize = async (id) => {
-        if (!window.confirm("Bạn chắc chắn muốn xóa kích thước này?")) return;
-        try {
-            await api.delete(`/size/${id}`);
-            alert("Xóa kích thước thành công!");
-            fetchSizes();
-        } catch (error) {
-            console.error("Error deleting size:", error);
-            alert("Có lỗi xảy ra!");
-        }
-    };
 
     const openModalForCreate = () => {
         setForm({ id: null, label: "", isActive: true });
-        setErrors({});
-        setIsModalOpen(true);
-    };
-
-    const openModalForEdit = (size) => {
-        setForm({ id: size.id, label: size.label, isActive: size.isActive });
         setErrors({});
         setIsModalOpen(true);
     };
@@ -121,7 +104,6 @@ export default function ManageSizes() {
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên kích thước</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
@@ -139,20 +121,6 @@ export default function ManageSizes() {
                                         ) : (
                                             <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Không hoạt động</span>
                                         )}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button
-                                            onClick={() => openModalForEdit(size)}
-                                            className="text-blue-600 hover:text-blue-800 mr-4"
-                                        >
-                                            Sửa
-                                        </button>
-                                        <button
-                                            onClick={() => deleteSize(size.id)}
-                                            className="text-red-600 hover:text-red-800"
-                                        >
-                                            Xóa
-                                        </button>
                                     </td>
                                 </tr>
                             ))

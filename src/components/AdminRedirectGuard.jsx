@@ -12,21 +12,22 @@ export default function AdminRedirectGuard({ children }) {
 
         const role =
             user?.role || user?.roles || user?.roleName;
+
         const isAdmin =
             role === "Admin" ||
             (Array.isArray(role) && role.includes("Admin"));
 
-        if (!user) return;
-
-        if (isAdmin) {
-            // if (!path.startsWith("/admin")) {
-            //     navigate("/admin/not-found", { replace: true });
-            // }
-        } else {
+        if (!user) {
             if (path.startsWith("/admin")) {
-                navigate("/not-found", { replace: true });
+                navigate("/", { replace: true });
             }
+            return;
         }
+
+        if (!isAdmin && path.startsWith("/admin")) {
+            navigate("/not-found", { replace: true });
+        }
+
     }, [user, location.pathname]);
 
     return children;
