@@ -99,8 +99,8 @@ export default function ProductDetailPage() {
                   key={s.id}
                   onClick={() => setSelectedSize(s)}
                   className={`px-4 py-2 rounded border transition ${selectedSize?.id === s.id
-                      ? "bg-black text-white border-black"
-                      : "bg-white border-gray-300 hover:bg-gray-100"
+                    ? "bg-black text-white border-black"
+                    : "bg-white border-gray-300 hover:bg-gray-100"
                     }`}
                 >
                   {s.size}

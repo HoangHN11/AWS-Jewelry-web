@@ -17,7 +17,7 @@ export default function HomePage() {
         const res = await api.get("/product");
         const data = res.data.data.items || [];
 
-        setFeatured(data.filter((x) => x.sizes.length > 0).slice(0, 4));
+        setFeatured(data.filter((x) => x.sizes.length > 0).slice(0, 8));
       } catch (err) {
         console.error("Error fetching featured products:", err);
       }
@@ -61,8 +61,16 @@ export default function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative h-[60vh] flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-transparent text-gray-900">
-        <div className="max-w-5xl mx-auto text-center p-6">
+      <section
+        className="relative h-[60vh] flex items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://www.europeanbusinessreview.com/wp-content/uploads/2023/05/luxury-jewelry.png')",
+        }}
+      >
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
+
+        <div className="relative max-w-5xl mx-auto text-center p-6">
           <h1 className="text-4xl md:text-6xl font-serif mb-4">
             Lumiere – Shine in Your Own Way
           </h1>
@@ -71,13 +79,14 @@ export default function HomePage() {
             tuyển chọn kỹ lưỡng với chất liệu và chế tác hoàn hảo.
           </p>
           <Link
-            to="/products"
+            to="/collections"
             className="inline-block px-6 py-3 bg-gold text-black rounded-md font-medium"
           >
             Khám phá bộ sưu tập
           </Link>
         </div>
       </section>
+
 
       {/* FEATURED COLLECTION */}
       <section className="max-w-6xl mx-auto px-6 py-12">
