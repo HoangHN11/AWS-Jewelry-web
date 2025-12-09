@@ -56,8 +56,8 @@ export default function App() {
                 <Route path="/account" element={<AccountPage />} />
                 <Route path="/account/orders" element={<OrderHistoryPage />} />
 
-                <Route path="/collections" element={<CollectionsPage />} />
-                <Route path="/collections/:id" element={<CollectionDetailPage />} />
+                {/* <Route path="/collections" element={<CollectionsPage />} />
+                <Route path="/collections/:id" element={<CollectionDetailPage />} /> */}
 
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />

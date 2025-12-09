@@ -35,7 +35,6 @@ export default function Navbar() {
         <nav className="hidden md:flex gap-6 items-center">
           <NavLink to="/" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Trang chủ</NavLink>
           <NavLink to="/products" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Sản phẩm</NavLink>
-          <NavLink to="/collections" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Bộ sưu tập</NavLink>
           <NavLink to="/news" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Tin tức</NavLink>
           <NavLink to="/about" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Về Lumiere</NavLink>
           <NavLink to="/stores" className={({ isActive }) => (isActive ? "text-gold" : "text-gray-700")}>Cửa hàng</NavLink>
@@ -139,7 +138,6 @@ export default function Navbar() {
 
             <NavLink to="/">Trang chủ</NavLink>
             <NavLink to="/products">Sản phẩm</NavLink>
-            <NavLink to="/collections">Bộ sưu tập</NavLink>
             <NavLink to="/news">Tin tức</NavLink>
             <NavLink to="/about">Về Lumiere</NavLink>
             <NavLink to="/stores">Cửa hàng</NavLink>
