@@ -171,16 +171,6 @@ export default function UpsertAccount() {
                     </div>
                 </div>
 
-                {/* PHONE */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Số điện thoại</label>
-                    <input
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        className="mt-1 block w-full border p-2 rounded-md"
-                    />
-                </div>
 
                 {/* ADDRESS */}
                 <div className="col-span-2">

@@ -8,7 +8,6 @@ export default function UpsertProduct() {
         name: "",
         description: "",
         image: null,
-        isNew: false,
         isActive: true,
     });
 
@@ -27,11 +26,10 @@ export default function UpsertProduct() {
                     setForm({
                         name: product.name,
                         description: product.description,
-                        image: null, // For update, image is optional
-                        isNew: product.isNew,
+                        image: null,
                         isActive: true,
                     });
-                    setImagePreview(product.image); // Assuming image is a URL
+                    setImagePreview(product.image);
                 } catch (err) {
                     console.error("Error fetching product:", err);
                     alert("Có lỗi xảy ra khi tải sản phẩm!");
@@ -84,7 +82,6 @@ export default function UpsertProduct() {
         if (form.image instanceof File) {
             formData.append("image", form.image);
         }
-        formData.append("isNew", form.isNew);
         formData.append("isActive", form.isActive);
 
         try {
@@ -173,19 +170,6 @@ export default function UpsertProduct() {
                 </div>
             </div>
 
-            {/* TOGGLES */}
-            <div className="flex gap-6 mt-4">
-                <label className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        name="isNew"
-                        checked={form.isNew}
-                        onChange={handleCheck}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    />
-                    <span className="text-sm text-gray-700">Sản phẩm mới</span>
-                </label>
-            </div>
 
             {/* UPSERT BUTTON */}
             <button

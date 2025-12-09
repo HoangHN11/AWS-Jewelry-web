@@ -7,7 +7,6 @@ export default function AccountPage() {
   const [form, setForm] = useState({
     fullName: "",
     address: "",
-    phone: "",
   });
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +22,6 @@ export default function AccountPage() {
         setForm({
           fullName: data.fullName || "",
           address: data.address || "",
-          phone: data.phone || "",
         });
       })
       .catch((e) => console.error(e))
@@ -35,7 +33,6 @@ export default function AccountPage() {
       const res = await api.put("/account", {
         fullName: form.fullName,
         address: form.address,
-        phone: form.phone,
       });
 
       alert("Cập nhật tài khoản thành công!");
@@ -82,16 +79,7 @@ export default function AccountPage() {
           />
         </div>
 
-        {/* PHONE */}
-        <div className="mb-4">
-          <label className="font-medium">Số điện thoại</label>
-          <input
-            type="text"
-            className="border rounded p-2 w-full mt-1"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-          />
-        </div>
+
 
         {/* UPDATE BUTTON */}
         <button

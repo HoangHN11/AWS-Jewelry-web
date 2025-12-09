@@ -84,7 +84,6 @@ export default function App() {
                 <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
                 <Route path="/admin/manage-products" element={<ManageProductsPage />} />
                 <Route path="/admin/manage-accounts" element={<ManageAccounts />} />
-                <Route path="/admin/create-account" element={<UpsertAccount />} />
                 <Route path="/admin/update-account/:id" element={<UpsertAccount />} />
                 <Route path="/admin/not-found" element={<NotFoundPage />} />
                 <Route path="/admin/*" element={<NotFoundPage />} />

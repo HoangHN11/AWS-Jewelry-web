@@ -38,12 +38,6 @@ export default function ManageAccounts() {
         <div className="mx-auto p-6 bg-white shadow-lg rounded-lg">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-semibold text-gray-800">Quản lý Tài khoản</h2>
-                <button
-                    onClick={() => navigate('/admin/create-account')}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
-                >
-                    + Tạo tài khoản mới
-                </button>
             </div>
 
             {/* Table */}
@@ -55,7 +49,6 @@ export default function ManageAccounts() {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vai trò</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Họ tên</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Địa chỉ</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số điện thoại</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
                         </tr>
                     </thead>
@@ -71,7 +64,6 @@ export default function ManageAccounts() {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.role}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.fullName}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.address}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.phone}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <button
                                             onClick={() => navigate(`/admin/update-account/${account.id}`)}
