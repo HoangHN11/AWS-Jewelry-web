@@ -18,12 +18,16 @@ export default function ManageProductsPage() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const loadProducts = () => {
         api.get("/product").then((res) => {
             setProducts(res.data.data.items);
         });
+    };
 
-        // Fetch master size để tạo size
+    useEffect(() => {
+        loadProducts();
+
+        // Load Master Size
         api.get("/size").then((res) => {
             setSizesMaster(res.data.data.items || []);
         });
@@ -34,7 +38,6 @@ export default function ManageProductsPage() {
         try {
             const res = await api.get(`/product/${productId}/sizes`);
             setSizes(res.data.data || []);
-            console.log(res);
         } catch (err) {
             console.error(err);
         }
@@ -73,6 +76,20 @@ export default function ManageProductsPage() {
         }
     };
 
+    const deleteProduct = async (id) => {
+        if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+
+        try {
+            await api.delete(`/product/${id}`);
+            alert("Đã xóa sản phẩm");
+
+            loadProducts();
+        } catch (err) {
+            console.error(err);
+            alert("Xóa thất bại");
+        }
+    };
+
     const activeProducts = products.filter((p) => !p.deleteAt);
 
     return (
@@ -91,31 +108,67 @@ export default function ManageProductsPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
-                                Tên sản phẩm
-                            </th>
-                            <th className="px-6 py-3"></th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">Ảnh</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">Tên</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 w-96">Mô tả</th>
+                            <th className="px-4 py-3 text-xs font-medium text-gray-500 text-center">Actions</th>
+                            <th className="px-4 py-3"></th>
                         </tr>
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200">
                         {activeProducts.map((product) => (
                             <React.Fragment key={product.id}>
-                                <tr
-                                    className="hover:bg-gray-50 cursor-pointer"
-                                    onClick={() => toggleExpand(product.id)}
-                                >
-                                    <td className="px-6 py-4 text-sm font-medium">
+
+                                {/* ROW PRODUCT */}
+                                <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-4">
+                                        <img
+                                            src={product.image}
+                                            alt="product"
+                                            className="w-16 h-16 object-cover rounded"
+                                        />
+                                    </td>
+
+                                    <td className="px-4 py-4 text-sm font-medium">
                                         {product.name}
                                     </td>
-                                    <td className="px-6 py-4 text-right text-sm text-blue-600">
+
+                                    <td className="px-4 py-4 text-sm text-gray-600 line-clamp-2">
+                                        {product.description}
+                                    </td>
+
+                                    {/* ACTIONS */}
+                                    <td className="px-4 py-4 text-center">
+                                        <button
+                                            onClick={() => navigate(`/admin/update-product/${product.id}`)}
+                                            className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 mr-2"
+                                        >
+                                            Sửa
+                                        </button>
+
+                                        <button
+                                            onClick={() => deleteProduct(product.id)}
+                                            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                                        >
+                                            Xóa
+                                        </button>
+                                    </td>
+
+                                    {/* BUTTON EXPAND */}
+                                    <td
+                                        className="px-4 py-4 text-blue-600 cursor-pointer text-right"
+                                        onClick={() => toggleExpand(product.id)}
+                                    >
                                         Xem size ▼
                                     </td>
                                 </tr>
 
+                                {/* ROW EXPAND SIZE */}
                                 {expanded === product.id && (
                                     <tr className="bg-gray-50">
-                                        <td colSpan="2" className="p-4">
+                                        <td colSpan="5" className="p-4">
+
                                             <h3 className="font-semibold mb-3">Danh sách Size</h3>
 
                                             {loadingSizes ? (
@@ -134,86 +187,83 @@ export default function ManageProductsPage() {
                                                     </thead>
 
                                                     <tbody>
-                                                        {sizes
-                                                            .map((s) => {
-                                                                const sizeName = s.size || "N/A";
-                                                                console.log(s)
+                                                        {sizes.map((s) => {
+                                                            const sizeName = s.size ?? "N/A";
 
+                                                            return (
+                                                                <tr key={s.id}>
+                                                                    <td className="border px-4 py-2">{sizeName}</td>
 
-                                                                return (
-                                                                    <tr key={s.id}>
-                                                                        <td className="border px-4 py-2">{sizeName}</td>
+                                                                    <td className="border px-4 py-2">
+                                                                        <input
+                                                                            type="number"
+                                                                            defaultValue={s.price}
+                                                                            className="border p-1 rounded w-24"
+                                                                            onChange={(e) => {
+                                                                                s._editPrice = e.target.value;
+                                                                            }}
+                                                                        />
+                                                                    </td>
 
-                                                                        <td className="border px-4 py-2">
-                                                                            <input
-                                                                                type="number"
-                                                                                defaultValue={s.price}
-                                                                                className="border p-1 rounded w-24"
-                                                                                onChange={(e) => {
-                                                                                    s._editPrice = e.target.value;
-                                                                                }}
-                                                                            />
-                                                                        </td>
+                                                                    <td className="border px-4 py-2">
+                                                                        <input
+                                                                            type="number"
+                                                                            defaultValue={s.quantity}
+                                                                            className="border p-1 rounded w-24"
+                                                                            onChange={(e) => {
+                                                                                s._editQty = e.target.value;
+                                                                            }}
+                                                                        />
+                                                                    </td>
 
-                                                                        <td className="border px-4 py-2">
-                                                                            <input
-                                                                                type="number"
-                                                                                defaultValue={s.quantity}
-                                                                                className="border p-1 rounded w-24"
-                                                                                onChange={(e) => {
-                                                                                    s._editQty = e.target.value;
-                                                                                }}
-                                                                            />
-                                                                        </td>
-
-                                                                        <td className="border px-4 py-2 flex gap-2 justify-center">
-
-                                                                            {/* BUTTON UPDATE */}
-                                                                            <button
-                                                                                className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                                                                                onClick={async () => {
-                                                                                    try {
-                                                                                        await api.put(`/product/${product.id}/sizes/${s.id}`, {
+                                                                    <td className="border px-4 py-2 flex gap-2 justify-center">
+                                                                        <button
+                                                                            className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                                                                            onClick={async () => {
+                                                                                try {
+                                                                                    await api.put(
+                                                                                        `/product/${product.id}/sizes/${s.id}`,
+                                                                                        {
                                                                                             price: Number(s._editPrice ?? s.price),
-                                                                                            quantity: Number(s._editQty ?? s.quantity)
-                                                                                        });
+                                                                                            quantity: Number(s._editQty ?? s.quantity),
+                                                                                            isActive: true
+                                                                                        }
+                                                                                    );
 
-                                                                                        alert("Cập nhật thành công!");
-                                                                                        fetchSizes(product.id);
-                                                                                    } catch (e) {
-                                                                                        console.error(e);
-                                                                                        alert("Lỗi cập nhật size");
-                                                                                    }
-                                                                                }}
-                                                                            >
-                                                                                Sửa
-                                                                            </button>
+                                                                                    alert("Cập nhật thành công!");
+                                                                                    fetchSizes(product.id);
+                                                                                } catch (e) {
+                                                                                    console.error(e);
+                                                                                    alert("Lỗi cập nhật size");
+                                                                                }
+                                                                            }}
+                                                                        >
+                                                                            Sửa
+                                                                        </button>
 
-                                                                            {/* BUTTON DELETE */}
-                                                                            <button
-                                                                                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-                                                                                onClick={async () => {
-                                                                                    if (!window.confirm("Xóa size này?")) return;
+                                                                        <button
+                                                                            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                                                                            onClick={async () => {
+                                                                                if (!window.confirm("Xóa size này?")) return;
 
-                                                                                    try {
-                                                                                        await api.delete(`/product/${product.id}/sizes/${s.id}`);
-                                                                                        alert("Đã xóa size!");
-                                                                                        fetchSizes(product.id);
-                                                                                    } catch (e) {
-                                                                                        console.error(e);
-                                                                                        alert("Lỗi xóa size");
-                                                                                    }
-                                                                                }}
-                                                                            >
-                                                                                Xóa
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                );
-                                                            })}
+                                                                                try {
+                                                                                    await api.delete(`/product/${product.id}/sizes/${s.id}`);
+                                                                                    alert("Đã xóa size!");
+                                                                                    fetchSizes(product.id);
+                                                                                } catch (e) {
+                                                                                    console.error(e);
+                                                                                    alert("Lỗi xóa size");
+                                                                                }
+                                                                            }}
+                                                                        >
+                                                                            Xóa
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        })}
                                                     </tbody>
                                                 </table>
-
                                             )}
 
                                             {/* FORM TẠO SIZE */}
@@ -221,7 +271,6 @@ export default function ManageProductsPage() {
                                                 <h4 className="font-medium mb-3">+ Thêm Size mới</h4>
 
                                                 <div className="grid grid-cols-3 gap-4">
-                                                    {/* SELECT SIZE */}
                                                     <select
                                                         className="border p-2 rounded"
                                                         value={newSize.sizeId}
@@ -274,6 +323,7 @@ export default function ManageProductsPage() {
                                                     + Thêm Size
                                                 </button>
                                             </div>
+
                                         </td>
                                     </tr>
                                 )}
