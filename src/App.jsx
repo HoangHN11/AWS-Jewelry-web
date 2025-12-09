@@ -39,62 +39,63 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <AuthProvider>
-        <AdminRedirectGuard />
-        <CartProvider>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/products/:id" element={<ProductDetailPage />} />
+        <AdminRedirectGuard>
+          <CartProvider>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/:id" element={<ProductDetailPage />} />
 
 
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
 
-              <Route path="/account" element={<AccountPage />} />
-              <Route path="/account/orders" element={<OrderHistoryPage />} />
+                <Route path="/account" element={<AccountPage />} />
+                <Route path="/account/orders" element={<OrderHistoryPage />} />
 
-              <Route path="/collections" element={<CollectionsPage />} />
-              <Route path="/collections/:id" element={<CollectionDetailPage />} />
+                <Route path="/collections" element={<CollectionsPage />} />
+                <Route path="/collections/:id" element={<CollectionDetailPage />} />
 
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/services" element={<ServicesPage />} />
 
-              <Route path="/news" element={<NewsListPage />} />
-              <Route path="/news/:slug" element={<NewsDetailPage />} />
+                <Route path="/news" element={<NewsListPage />} />
+                <Route path="/news/:slug" element={<NewsDetailPage />} />
 
-              <Route path="/faq" element={<FAQPage />} />
+                <Route path="/faq" element={<FAQPage />} />
 
-              <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
-              <Route path="/policies/warranty" element={<WarrantyPolicyPage />} />
-              <Route
-                path="/policies/shipping"
-                element={<ShippingReturnPolicyPage />}
-              />
+                <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
+                <Route path="/policies/warranty" element={<WarrantyPolicyPage />} />
+                <Route
+                  path="/policies/shipping"
+                  element={<ShippingReturnPolicyPage />}
+                />
 
-              <Route path="/stores" element={<StoreLocatorPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/booking" element={<BookingPage />} />
+                <Route path="/stores" element={<StoreLocatorPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/booking" element={<BookingPage />} />
 
-              <Route path="/auth" element={<AuthPage />} />
-              {/* Admin-only routes */}
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/create-product" element={<UpsertProduct />} />
-              <Route path="/admin/update-product/:id" element={<UpsertProduct />} />
-              <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
-              <Route path="/admin/manage-products" element={<ManageProductsPage />} />
-              <Route path="/admin/manage-accounts" element={<ManageAccounts />} />
-              <Route path="/admin/create-account" element={<UpsertAccount />} />
-              <Route path="/admin/update-account/:id" element={<UpsertAccount />} />
-              <Route path="/admin/not-found" element={<NotFoundPage />} />
-              <Route path="/admin/*" element={<NotFoundPage />} />
+                <Route path="/auth" element={<AuthPage />} />
+                {/* Admin-only routes */}
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/create-product" element={<UpsertProduct />} />
+                <Route path="/admin/update-product/:id" element={<UpsertProduct />} />
+                <Route path="/admin/manage-sizes" element={<ManageSizePage />} />
+                <Route path="/admin/manage-products" element={<ManageProductsPage />} />
+                <Route path="/admin/manage-accounts" element={<ManageAccounts />} />
+                <Route path="/admin/create-account" element={<UpsertAccount />} />
+                <Route path="/admin/update-account/:id" element={<UpsertAccount />} />
+                <Route path="/admin/not-found" element={<NotFoundPage />} />
+                <Route path="/admin/*" element={<NotFoundPage />} />
 
-              {/* Shared not-found routes */}
-              <Route path="/not-found" element={<NotFoundPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </CartProvider>
+                {/* Shared not-found routes */}
+                <Route path="/not-found" element={<NotFoundPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </CartProvider>
+        </AdminRedirectGuard>
       </AuthProvider>
     </BrowserRouter>
   );
