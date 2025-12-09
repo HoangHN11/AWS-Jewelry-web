@@ -21,7 +21,27 @@ const news = [
     image:
       "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
     excerpt: "Chương trình khuyến mãi mùa hè cho các mẫu chọn lọc.",
-    content: "<p>Chi tiết chương trình giảm giá mùa hè...</p>",
+    content: `
+  <p>Chào đón mùa hè 2025, chúng tôi mang đến chương trình <strong>khuyến mãi lớn nhất trong năm</strong> dành cho các mẫu trang sức được yêu thích nhất. Đây là dịp tuyệt vời để bạn làm mới bộ sưu tập của mình với mức giá vô cùng hấp dẫn.</p>
+
+  <h3>🎉 Thời gian áp dụng</h3>
+  <p>Từ <strong>01/06/2025 – 30/06/2025</strong> trên toàn bộ hệ thống cửa hàng và website.</p>
+
+  <h3>🔥 Sản phẩm áp dụng ưu đãi</h3>
+  <ul>
+    <li>Nhẫn vàng & kim cương – giảm đến <strong>25%</strong></li>
+    <li>Dây chuyền và mặt dây – giảm <strong>15%</strong></li>
+    <li>Bông tai sang trọng – giảm đến <strong>30%</strong></li>
+    <li>Bộ sưu tập mùa hè – ưu đãi đặc biệt khi mua theo set</li>
+  </ul>
+
+  <h3>🌟 Ưu đãi đặc biệt</h3>
+  <p>Khách hàng hóa đơn từ <strong>3.000.000₫</strong> trở lên sẽ nhận thêm voucher giảm <strong>10%</strong> cho lần mua tiếp theo.</p>
+
+  <h3>💬 Lời kết</h3>
+  <p>Mùa hè là thời điểm hoàn hảo để tỏa sáng với phong cách riêng. Đừng bỏ lỡ cơ hội sở hữu trang sức cao cấp với giá tốt nhất trong năm!</p>
+`
+
   },
   {
     slug: "trend-2025",
@@ -33,7 +53,27 @@ const news = [
     image:
       "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
     excerpt: "Những mẫu được dự đoán sẽ lên ngôi trong 2025.",
-    content: "<p>Nội dung xu hướng...</p>",
+    content: `
+  <p>Chào đón mùa hè 2025, chúng tôi mang đến chương trình <strong>khuyến mãi lớn nhất trong năm</strong> dành cho các mẫu trang sức được yêu thích nhất. Đây là dịp tuyệt vời để bạn làm mới bộ sưu tập của mình với mức giá vô cùng hấp dẫn.</p>
+
+  <h3>🎉 Thời gian áp dụng</h3>
+  <p>Từ <strong>01/06/2025 – 30/06/2025</strong> trên toàn bộ hệ thống cửa hàng và website.</p>
+
+  <h3>🔥 Sản phẩm áp dụng ưu đãi</h3>
+  <ul>
+    <li>Nhẫn vàng & kim cương – giảm đến <strong>25%</strong></li>
+    <li>Dây chuyền và mặt dây – giảm <strong>15%</strong></li>
+    <li>Bông tai sang trọng – giảm đến <strong>30%</strong></li>
+    <li>Bộ sưu tập mùa hè – ưu đãi đặc biệt khi mua theo set</li>
+  </ul>
+
+  <h3>🌟 Ưu đãi đặc biệt</h3>
+  <p>Khách hàng hóa đơn từ <strong>3.000.000₫</strong> trở lên sẽ nhận thêm voucher giảm <strong>10%</strong> cho lần mua tiếp theo.</p>
+
+  <h3>💬 Lời kết</h3>
+  <p>Mùa hè là thời điểm hoàn hảo để tỏa sáng với phong cách riêng. Đừng bỏ lỡ cơ hội sở hữu trang sức cao cấp với giá tốt nhất trong năm!</p>
+`
+
   },
   {
     slug: "care-guide",
@@ -45,7 +85,28 @@ const news = [
     image:
       "https://images.pexels.com/photos/1457801/pexels-photo-1457801.jpeg?auto=compress&cs=tinysrgb&w=800",
     excerpt: "Cách giữ trang sức bền đẹp theo thời gian.",
-    content: "<p>Mẹo bảo quản...</p>",
+    content: `
+  <p>Trang sức nếu được bảo quản đúng cách sẽ luôn giữ được độ sáng bóng và giá trị theo thời gian. Dưới đây là những mẹo đơn giản nhưng cực kỳ hiệu quả giúp bạn giữ gìn vẻ đẹp của các món trang sức yêu thích.</p>
+
+  <h3>🧴 1. Tránh tiếp xúc với hóa chất</h3>
+  <p>Nước hoa, mỹ phẩm, chất tẩy rửa hay clo trong hồ bơi đều có thể khiến kim loại và đá quý bị xỉn màu. Hãy đeo trang sức <strong>sau khi</strong> makeup và tháo ra trước khi bơi hoặc rửa chén.</p>
+
+  <h3>💼 2. Cất trong hộp riêng</h3>
+  <p>Hãy dùng hộp trang sức có ngăn riêng để tránh va chạm. Nhất là với vàng trắng và bạc, trầy xước rất dễ xảy ra.</p>
+
+  <h3>🧽 3. Vệ sinh định kỳ</h3>
+  <p>Sử dụng nước ấm pha xà phòng loãng, ngâm trang sức vài phút rồi chải nhẹ bằng bàn chải lông mềm. Lau bằng khăn khô và để khô tự nhiên.</p>
+
+  <h3>🔧 4. Kiểm tra đá và móc khóa</h3>
+  <p>Sau một thời gian sử dụng, móc khóa có thể lỏng hoặc đá có thể bị xê dịch. Bạn nên mang đến cửa hàng để kiểm tra định kỳ 6 tháng một lần.</p>
+
+  <h3>💖 5. Giữ trang sức tránh xa độ ẩm cao</h3>
+  <p>Độ ẩm khiến bạc bị xỉn nhanh hơn. Đừng để trang sức trong phòng tắm hoặc nơi ẩm ướt.</p>
+
+  <h3>📌 Lời khuyên cuối</h3>
+  <p>Chỉ cần một chút chăm sóc, trang sức của bạn sẽ luôn sáng bóng và bền đẹp trong nhiều năm.</p>
+`
+
   },
 ];
 

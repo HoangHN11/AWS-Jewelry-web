@@ -18,28 +18,41 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   // ➤ ADD ITEM
-  function addItem(product, qty = 1) {
-    const firstSize = product.productSizes?.[0] || {};
-    const price = firstSize.price || 0;
+  function addItem(product, qty = 1, selectedSize) {
+    if (!selectedSize) return;
+
+    const price = selectedSize.price;
+
 
     setCart((prev) => {
-      const found = prev.find((p) => p.id === product.id);
+      const found = prev.find(
+        (p) => p.id === product.id && p.sizeId === selectedSize.id
+      );
+
       if (found) {
         return prev.map((p) =>
-          p.id === product.id ? { ...p, qty: p.qty + qty } : p
+          p.id === product.id && p.sizeId === selectedSize.id
+            ? { ...p, qty: p.qty + qty }
+            : p
         );
       }
 
-      // Lưu 1 bản product tối giản + extra price
-      return [...prev, {
-        id: product.id,
-        name: product.name,
-        image: product.image,
-        price,
-        qty
-      }];
+      return [
+        ...prev,
+        {
+          id: product.id,
+          name: product.name,
+          image: product.image,
+          sizeId: selectedSize.id,
+          sizeLabel: selectedSize.size,
+          price,
+          qty,
+        },
+      ];
     });
   }
+
+
 
   // ➤ UPDATE QTY
   function updateQty(id, qty) {

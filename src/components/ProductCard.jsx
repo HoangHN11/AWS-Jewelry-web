@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default function ProductCard({ product }) {
   // Lấy size đầu tiên nếu có
-  const mainSize = product.productSizes?.[0] || null;
+  const firstSize = product.sizes?.[0] || null;
 
-  const price = mainSize?.price ?? 0;
-  const quantity = mainSize?.quantity ?? 0;
+  const price = firstSize?.price ?? product.price ?? 0;
+  const quantity = firstSize?.quantity ?? 0;
+
 
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transform hover:scale-105 transition p-3">
@@ -36,6 +37,7 @@ export default function ProductCard({ product }) {
         <p className="text-sm text-gray-500 mt-1">
           Quantity: {quantity}
         </p>
+
 
         <div className="mt-3 flex items-center justify-between">
           {/* PRICE */}

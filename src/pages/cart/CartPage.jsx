@@ -50,10 +50,10 @@ export default function CartPage() {
               </div>
               <div className="text-right">
                 <div className="font-semibold">
-                  {(item.price / 1000000).toFixed(2)}M ₫
+                  {(item.price)} ₫
                 </div>
                 <div className="text-sm text-gray-500">
-                  Tổng: {((item.price * item.qty) / 1000000).toFixed(2)}M ₫
+                  Tổng: {((item.price * item.qty))} ₫
                 </div>
                 <button
                   className="mt-2 text-sm text-red-500"
@@ -69,7 +69,7 @@ export default function CartPage() {
         <aside className="bg-white p-6 rounded shadow">
           <div className="text-sm text-gray-500">Tạm tính</div>
           <div className="text-2xl font-semibold mt-2">
-            {(totalPrice / 1000000).toFixed(2)}M ₫
+            {(totalPrice)} ₫
           </div>
           <div className="mt-4 text-sm">
             <label className="block mb-2">Mã giảm giá</label>

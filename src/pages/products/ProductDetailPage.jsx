@@ -24,11 +24,12 @@ export default function ProductDetailPage() {
       try {
         const response = await api.get(`/product/${id}`);
         const data = response.data.data;
-        console.log(response)
+
         setProduct(data);
 
+        // Gán selectedSize đúng lúc product đã load
         if (data.productSizes?.length > 0) {
-          setSelectedSize(data.productSizes[0]); // auto select first size
+          setSelectedSize(data.productSizes[0]);
         }
       } catch (err) {
         console.error("Lỗi load product:", err);
@@ -51,9 +52,9 @@ export default function ProductDetailPage() {
 
   const sizes = product.productSizes || [];
 
-  // Derived values
-  const price = selectedSize?.price || 0;
-  const stock = selectedSize?.quantity || 0;
+  // Derived values (LUÔN lấy từ selectedSize)
+  const price = Number(selectedSize?.price || 0);
+  const stock = Number(selectedSize?.quantity || 0);
 
   const related = allProducts
     .filter((p) => p.id !== product.id)
@@ -98,8 +99,8 @@ export default function ProductDetailPage() {
                   key={s.id}
                   onClick={() => setSelectedSize(s)}
                   className={`px-4 py-2 rounded border transition ${selectedSize?.id === s.id
-                    ? "bg-black text-white border-black"
-                    : "bg-white border-gray-300 hover:bg-gray-100"
+                      ? "bg-black text-white border-black"
+                      : "bg-white border-gray-300 hover:bg-gray-100"
                     }`}
                 >
                   {s.size}
@@ -138,7 +139,13 @@ export default function ProductDetailPage() {
                   return;
                 }
 
+                console.log("=== ADD ITEM ===");
+                console.log("Product:", product);
+                console.log("Qty:", qty);
+                console.log("SelectedSize:", selectedSize);
+
                 addItem(product, qty, selectedSize);
+                alert("Đã thêm sản phẩm vào giỏ hàng!");
               }}
             >
               Thêm vào giỏ
