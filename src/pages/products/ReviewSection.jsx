@@ -4,7 +4,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 export default function ReviewSection({ productId }) {
     const [reviews, setReviews] = useState([]);
-
     const { user } = useContext(AuthContext);
 
     const [newReview, setNewReview] = useState({
@@ -14,18 +13,22 @@ export default function ReviewSection({ productId }) {
 
     const [hoverRating, setHoverRating] = useState(0);
 
-    useEffect(() => {
+    // --- LOAD REVIEWS ---
+    const loadReviews = async () => {
         try {
-            api.get(`/product/${productId}/review`).then((res) => {
-                console.log(res)
-                setReviews(res.data.data.items);
-            })
+            const res = await api.get(`/product/${productId}/review`);
+            setReviews(res.data.data.items || []);
         } catch (error) {
             console.log(error);
         }
-    }, [productId])
+    };
 
-    const handleSubmitReview = (e) => {
+    useEffect(() => {
+        loadReviews();
+    }, [productId]);
+
+    // --- SUBMIT REVIEW ---
+    const handleSubmitReview = async (e) => {
         e.preventDefault();
 
         if (!user) {
@@ -33,22 +36,30 @@ export default function ReviewSection({ productId }) {
             return;
         }
 
-        const newItem = {
-            rating: newReview.rating,
-            content: newReview.content,
-        };
+        try {
+            await api.post(`/product/${productId}/review`, {
+                rating: newReview.rating,
+                content: newReview.content,
+            });
 
-        api.post(`/product/${productId}/review`, newItem).then((res) => {
-            console.log(res)
-        })
+            alert("Đánh giá thành công!");
 
-        setReviews([res.data.data, ...reviews]);
-        setNewReview({ accountId: "current-user-id", rating: 5, content: "" });
-        setHoverRating(0);
+            await loadReviews();
+
+            setNewReview({ rating: 5, content: "" });
+            setHoverRating(0);
+        } catch (err) {
+            console.error(err);
+            alert("Đánh giá thất bại!");
+        }
     };
 
     const formatDate = (dateStr) => {
+        if (!dateStr) return "—";
+
         const d = new Date(dateStr);
+        if (isNaN(d)) return "Không rõ ngày";
+
         return d.toLocaleDateString("vi-VN");
     };
 
@@ -81,7 +92,7 @@ export default function ReviewSection({ productId }) {
             {/* Add review */}
             {!user ? (
                 <div className="bg-red-100 text-red-700 p-4 rounded mb-6">
-                    Bạn cần <a href="/login" className="text-blue-600 underline">đăng nhập</a> để đánh giá sản phẩm.
+                    Bạn cần <a href="/login" className="text-blue-600 underline">đăng nhập</a> để đánh giá.
                 </div>
             ) : (
                 <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 p-4 rounded">
@@ -115,6 +126,7 @@ export default function ReviewSection({ productId }) {
                         onChange={(e) =>
                             setNewReview({ ...newReview, content: e.target.value })
                         }
+                        required
                     />
 
                     <button className="bg-gold text-black font-semibold px-4 py-2 rounded">
@@ -123,10 +135,10 @@ export default function ReviewSection({ productId }) {
                 </form>
             )}
 
-            {/* List */}
+            {/* Review List */}
             {reviews.map((r) => (
-                <div key={r.id} className="border-b py-4">
-                    {/* <div className="font-semibold">{r.account.fullName}</div> */}
+                <div key={r.id || crypto.randomUUID()} className="border-b py-4">
+                    <div className="font-semibold">{r.fullName || "Ẩn danh"}</div>
                     <div className="text-xs text-gray-400">{formatDate(r.createAt)}</div>
                     <div className="my-1">{renderStars(r.rating)}</div>
                     <p className="text-gray-700">{r.content}</p>

@@ -19,9 +19,9 @@ export default function AdminRedirectGuard({ children }) {
         if (!user) return;
 
         if (isAdmin) {
-            if (!path.startsWith("/admin")) {
-                navigate("/admin/not-found", { replace: true });
-            }
+            // if (!path.startsWith("/admin")) {
+            //     navigate("/admin/not-found", { replace: true });
+            // }
         } else {
             if (path.startsWith("/admin")) {
                 navigate("/not-found", { replace: true });

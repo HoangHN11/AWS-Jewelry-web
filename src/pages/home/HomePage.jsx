@@ -1,17 +1,30 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import products from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 import api from "../../services/axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
-
 export default function HomePage() {
-  const featured = products.slice(0, 4);
-  const { loadUser } = useContext(AuthContext);
+  const [featured, setFeatured] = useState([]);
 
+  const { loadUser } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const res = await api.get("/product");
+        const data = res.data.data.items || [];
+
+        setFeatured(data.slice(0, 4));
+      } catch (err) {
+        console.error("Error fetching featured products:", err);
+      }
+    };
+
+    fetchFeatured();
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -28,17 +41,13 @@ export default function HomePage() {
           code,
         });
 
-        const { id_token, access_token, refresh_token } = response.data.data;
+        const { access_token } = response.data.data;
 
-        // Lưu token
         localStorage.setItem("token", access_token);
-
 
         await loadUser();
 
-        // Xóa param ?code= khỏi URL
         navigate("/", { replace: true });
-
       } catch (err) {
         console.error("Error exchanging code:", err);
         alert("Đăng nhập thất bại!");
@@ -51,6 +60,7 @@ export default function HomePage() {
 
   return (
     <div>
+      {/* HERO */}
       <section className="relative h-[60vh] flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-transparent text-gray-900">
         <div className="max-w-5xl mx-auto text-center p-6">
           <h1 className="text-4xl md:text-6xl font-serif mb-4">
@@ -69,13 +79,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FEATURED COLLECTION */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <h2 className="text-2xl font-semibold mb-6">Featured Collection</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+
+        {featured.length === 0 ? (
+          <p>Đang tải sản phẩm...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

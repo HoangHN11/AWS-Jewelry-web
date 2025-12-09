@@ -136,7 +136,8 @@ export default function ManageProductsPage() {
                                                     <tbody>
                                                         {sizes
                                                             .map((s) => {
-                                                                const sizeName = s.size?.label || "N/A";
+                                                                const sizeName = s.size || "N/A";
+                                                                console.log(s)
 
 
                                                                 return (
@@ -178,7 +179,7 @@ export default function ManageProductsPage() {
                                                                                         });
 
                                                                                         alert("Cập nhật thành công!");
-                                                                                        fetchSizes(s.productId);
+                                                                                        fetchSizes(product.id);
                                                                                     } catch (e) {
                                                                                         console.error(e);
                                                                                         alert("Lỗi cập nhật size");
@@ -197,7 +198,7 @@ export default function ManageProductsPage() {
                                                                                     try {
                                                                                         await api.delete(`/product/${product.id}/sizes/${s.id}`);
                                                                                         alert("Đã xóa size!");
-                                                                                        fetchSizes(s.productId);
+                                                                                        fetchSizes(product.id);
                                                                                     } catch (e) {
                                                                                         console.error(e);
                                                                                         alert("Lỗi xóa size");
