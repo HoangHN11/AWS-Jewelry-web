@@ -49,7 +49,6 @@ export default function ManageAccounts() {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vai trò</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Họ tên</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Địa chỉ</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
@@ -61,17 +60,9 @@ export default function ManageAccounts() {
                             accounts.map((account) => (
                                 <tr key={account.id} className="hover:bg-gray-50 transition">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{account.email}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.role}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">User</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.fullName}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.address}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button
-                                            onClick={() => navigate(`/admin/update-account/${account.id}`)}
-                                            className="text-blue-600 hover:text-blue-800 mr-4"
-                                        >
-                                            Sửa
-                                        </button>
-                                    </td>
                                 </tr>
                             ))
                         )}

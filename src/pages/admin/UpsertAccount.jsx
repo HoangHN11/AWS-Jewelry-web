@@ -119,19 +119,6 @@ export default function UpsertAccount() {
                     </div>
                 </div>
 
-                {/* ONLY SHOW ROLE WHEN UPDATE */}
-                {id && (
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Vai trò</label>
-                        <input
-                            name="role"
-                            value={form.role}
-                            onChange={handleChange}
-                            className="mt-1 block w-full border p-2 rounded-md"
-                            placeholder="admin / user"
-                        />
-                    </div>
-                )}
 
                 {/* ONLY SHOW PASSWORD WHEN CREATE */}
                 {!id && (

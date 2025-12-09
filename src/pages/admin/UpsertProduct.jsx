@@ -17,6 +17,8 @@ export default function UpsertProduct() {
 
     const [imagePreview, setImagePreview] = useState(null);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         if (id) {
             const fetchProduct = async () => {
@@ -42,10 +44,6 @@ export default function UpsertProduct() {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
         setErrors({ ...errors, [e.target.name]: "" });
-    };
-
-    const handleCheck = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.checked });
     };
 
     const handleImageUpload = (e) => {
@@ -76,6 +74,10 @@ export default function UpsertProduct() {
     const upsertProduct = async () => {
         if (!validate()) return;
 
+        if (loading) return;
+
+        setLoading(true);
+
         const formData = new FormData();
         formData.append("name", form.name);
         formData.append("description", form.description);
@@ -101,6 +103,9 @@ export default function UpsertProduct() {
         } catch (err) {
             console.error("Error upserting product:", err);
             alert("Có lỗi xảy ra!");
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -173,10 +178,13 @@ export default function UpsertProduct() {
 
             {/* UPSERT BUTTON */}
             <button
+                disabled={loading}
                 onClick={upsertProduct}
                 className="mt-6 w-full py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
             >
-                {id ? "Cập nhật sản phẩm" : "Tạo sản phẩm"}
+                {loading
+                    ? "Đang xử lý..."
+                    : id ? "Cập nhật sản phẩm" : "Tạo sản phẩm"}
             </button>
         </div>
     );

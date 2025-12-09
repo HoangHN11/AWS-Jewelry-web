@@ -16,22 +16,32 @@ export default function ManageProductsPage() {
         quantity: "",
     });
 
+    const [page, setPage] = useState(1);
+    const [pageSize] = useState(10);
+    const [total, setTotal] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+
     const navigate = useNavigate();
 
-    const loadProducts = () => {
-        api.get("/product").then((res) => {
+    const fetchProducts = async () => {
+        try {
+            const res = await api.get(`/product?page=${page}&size=${pageSize}`);
             setProducts(res.data.data.items);
-        });
+            setTotal(res.data.data.total);
+            setTotalPages(res.data.data.totalPages);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
     };
 
     useEffect(() => {
-        loadProducts();
+        fetchProducts();
 
         // Load Master Size
         api.get("/size").then((res) => {
             setSizesMaster(res.data.data.items || []);
         });
-    }, []);
+    }, [page]);
 
     const fetchSizes = async (productId) => {
         setLoadingSizes(true);
@@ -83,7 +93,7 @@ export default function ManageProductsPage() {
             await api.delete(`/product/${id}`);
             alert("Đã xóa sản phẩm");
 
-            loadProducts();
+            fetchProducts();
         } catch (err) {
             console.error(err);
             alert("Xóa thất bại");
@@ -91,6 +101,14 @@ export default function ManageProductsPage() {
     };
 
     const activeProducts = products.filter((p) => !p.deleteAt);
+
+    const handlePrevPage = () => {
+        if (page > 1) setPage(page - 1);
+    };
+
+    const handleNextPage = () => {
+        if (page < totalPages) setPage(page + 1);
+    };
 
     return (
         <div className="mx-auto p-6 bg-white shadow-lg rounded-lg">
@@ -331,6 +349,27 @@ export default function ManageProductsPage() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-between items-center mt-4">
+                <button
+                    onClick={handlePrevPage}
+                    disabled={page === 1}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md disabled:opacity-50 hover:bg-gray-300 transition"
+                >
+                    Trước
+                </button>
+                <span className="text-sm text-gray-700">
+                    Trang {page} / {totalPages} (Tổng: {total})
+                </span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={page === totalPages}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md disabled:opacity-50 hover:bg-gray-300 transition"
+                >
+                    Sau
+                </button>
             </div>
         </div>
     );

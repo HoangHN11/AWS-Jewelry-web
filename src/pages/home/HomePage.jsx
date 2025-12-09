@@ -17,7 +17,7 @@ export default function HomePage() {
         const res = await api.get("/product");
         const data = res.data.data.items || [];
 
-        setFeatured(data.slice(0, 4));
+        setFeatured(data.filter((x) => x.sizes.length > 0).slice(0, 4));
       } catch (err) {
         console.error("Error fetching featured products:", err);
       }
