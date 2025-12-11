@@ -87,7 +87,6 @@ export default function HomePage() {
         </div>
       </section>
 
-
       {/* FEATURED COLLECTION */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <h2 className="text-2xl font-semibold mb-6">Featured Collection</h2>
