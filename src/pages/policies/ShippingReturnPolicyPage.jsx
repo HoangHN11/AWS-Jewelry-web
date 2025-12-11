@@ -5,115 +5,212 @@ export default function ShippingReturnPolicyPage() {
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="px-6 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Chính Sách Đổi Trả</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            Chính Sách Đổi Trả
+          </h1>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">1. Giới Thiệu</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              1. Giới Thiệu
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Chúng tôi hiểu rằng đôi khi sản phẩm có thể không đáp ứng kỳ vọng của bạn. Chính sách đổi trả này cho phép bạn đổi hoặc trả sản phẩm trong một khoảng thời gian nhất định, nhằm đảm bảo sự hài lòng của khách hàng.
+              Chúng tôi hiểu rằng đôi khi trang sức mua có thể không đáp ứng kỳ
+              vọng của bạn. Chính sách đổi trả này cho phép bạn đổi hoặc trả
+              trang sức trong một khoảng thời gian nhất định, nhằm đảm bảo sự
+              hài lòng của khách hàng.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Chính sách này áp dụng cho tất cả các sản phẩm mua trực tuyến hoặc tại cửa hàng. Chúng tôi khuyến khích khách hàng kiểm tra kỹ sản phẩm trước khi mua để tránh các trường hợp đổi trả không cần thiết.
+              Chính sách này áp dụng cho tất cả các sản phẩm trang sức mua trực
+              tuyến hoặc tại cửa hàng. Chúng tôi khuyến khích khách hàng kiểm
+              tra kỹ sản phẩm trước khi mua để tránh các trường hợp đổi trả
+              không cần thiết.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Đổi trả chỉ áp dụng cho sản phẩm còn nguyên vẹn, chưa sử dụng, và kèm theo đầy đủ phụ kiện, bao bì gốc.
+              Đổi trả chỉ áp dụng cho sản phẩm trang sức còn nguyên vẹn, chưa sử
+              dụng, không có xước hay hư hỏng, và kèm theo đầy đủ phụ kiện, bao
+              bì gốc, chứng chỉ xác thực.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">2. Thời Gian Đổi Trả</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              2. Thời Gian Đổi Trả
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Khách hàng có thể đổi hoặc trả sản phẩm trong vòng:
+              Khách hàng có thể đổi hoặc trả trang sức trong vòng:
             </p>
             <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4">
-              <li>7 ngày đối với sản phẩm điện tử và công nghệ.</li>
-              <li>14 ngày đối với sản phẩm thời trang và phụ kiện.</li>
-              <li>30 ngày đối với sản phẩm gia dụng và nội thất.</li>
-              <li>Thời gian bắt đầu từ ngày nhận hàng đối với mua online, hoặc ngày mua đối với mua tại cửa hàng.</li>
+              <li>30 ngày đối với trang sức vàng, bạc, kim loại quý.</li>
+              <li>30 ngày đối với trang sức đá quý và kim cương.</li>
+              <li>
+                7 ngày đối với trang sức phối, mạ (do tính chất dễ bị oxy hóa).
+              </li>
+              <li>
+                14 ngày đối với phụ kiện trang sức (móc, dây đeo, hộp đựng).
+              </li>
+              <li>
+                Thời gian bắt đầu từ ngày nhận hàng đối với mua online, hoặc
+                ngày mua đối với mua tại cửa hàng.
+              </li>
             </ul>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Sau thời gian quy định, chúng tôi không chấp nhận đổi trả trừ khi sản phẩm có lỗi từ nhà sản xuất và nằm trong chính sách bảo hành.
+              Sau thời gian quy định, chúng tôi không chấp nhận đổi trả trừ khi
+              sản phẩm có lỗi từ nhà sản xuất và nằm trong chính sách bảo hành.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Trong trường hợp đặc biệt như lễ hội hoặc chương trình khuyến mãi, thời gian đổi trả có thể được điều chỉnh và sẽ được thông báo rõ ràng.
+              Đối với sản phẩm custom (thiết kế theo yêu cầu), thời gian đổi trả
+              tính từ ngày hoàn thành sản phẩm.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">3. Điều Kiện Đổi Trả</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              3. Điều Kiện Đổi Trả
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Sản phẩm được đổi trả nếu:
+              Sản phẩm trang sức được đổi trả nếu:
             </p>
             <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4">
-              <li>Sản phẩm bị lỗi kỹ thuật hoặc hư hỏng từ nhà sản xuất.</li>
-              <li>Sản phẩm không đúng với mô tả trên website hoặc hóa đơn.</li>
-              <li>Khách hàng không hài lòng với sản phẩm (áp dụng cho một số loại sản phẩm).</li>
-              <li>Sản phẩm còn nguyên tem, nhãn mác, bao bì gốc.</li>
+              <li>
+                Trang sức bị khiếm khuyết kỹ thuật hoặc hư hỏng từ nhà sản xuất
+                (khớp nối lỏng, dây dụi đứt).
+              </li>
+              <li>
+                Trang sức không đúng với mô tả trên website (màu sắc, kích
+                thước, chất liệu khác).
+              </li>
+              <li>Trang sức được gửi sai, lẫn lộn với đơn hàng khác.</li>
+              <li>
+                Trang sức còn nguyên hộp, chứng chỉ xác thực, không có xước hoặc
+                hư hỏng.
+              </li>
               <li>Có hóa đơn mua hàng hoặc mã đơn hàng hợp lệ.</li>
-              <li>Sản phẩm chưa bị sử dụng, giặt giũ, hoặc hư hỏng do khách hàng.</li>
-              <li>Phụ kiện đi kèm đầy đủ và chưa bị mở封.</li>
+              <li>
+                Trang sức chưa được đeo/sử dụng hoặc chỉ thử vừa vặn không khiến
+                hư hỏng.
+              </li>
+              <li>
+                Phụ kiện đi kèm đầy đủ (chứng chỉ, dây chuyền, móc khoá, bao
+                vệ).
+              </li>
             </ul>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Chúng tôi có quyền kiểm tra sản phẩm trước khi chấp nhận đổi trả. Nếu sản phẩm không đáp ứng điều kiện, chúng tôi sẽ từ chối và giải thích lý do.
+              Chúng tôi có quyền kiểm tra sản phẩm trước khi chấp nhận đổi trả.
+              Nếu sản phẩm không đáp ứng điều kiện, chúng tôi sẽ từ chối và giải
+              thích lý do.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Đối với sản phẩm cá nhân hóa hoặc đặt hàng đặc biệt, đổi trả có thể bị hạn chế hoặc không áp dụng.
+              Đối với sản phẩm custom (thiết kế theo yêu cầu), đổi trả chỉ áp
+              dụng nếu có lỗi từ phía chúng tôi. Nếu lỗi từ khách hàng, không áp
+              dụng đổi trả.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">4. Quy Trình Đổi Trả</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              4. Quy Trình Đổi Trả
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Quy trình đổi trả như sau:
+              Quy trình đổi trả trang sức như sau:
             </p>
             <ol className="list-decimal list-inside text-gray-700 leading-relaxed mb-4">
-              <li>Liên hệ bộ phận chăm sóc khách hàng để yêu cầu đổi trả.</li>
-              <li>Cung cấp lý do đổi trả và ảnh/video chứng minh nếu cần.</li>
-              <li>Gửi sản phẩm về địa chỉ kho hàng hoặc mang đến cửa hàng gần nhất.</li>
-              <li>Nhân viên kiểm tra và xác nhận điều kiện đổi trả.</li>
-              <li>Hoàn tất đổi sản phẩm mới hoặc hoàn tiền trong vòng 7-10 ngày.</li>
-              <li>Hoàn tiền sẽ được chuyển khoản hoặc trừ vào thẻ tín dụng tùy theo phương thức thanh toán gốc.</li>
+              <li>
+                Liên hệ bộ phận chăm sóc khách hàng trong thời gian quy định để
+                yêu cầu đổi trả.
+              </li>
+              <li>Cung cấp lý do đổi trả, ảnh/video trang sức và hóa đơn.</li>
+              <li>
+                Gửi trang sức về cửa hàng hoặc địa chỉ gửi hàng của chúng tôi
+                với bao bì an toàn (hộp ghi ngoài hoặc phong bì bảo hiểm).
+              </li>
+              <li>
+                Nhân viên kiểm tra trang sức chi tiết: kiểm tra xước, hư hỏng,
+                màu sắc, chứng chỉ xác thực.
+              </li>
+              <li>
+                Xác nhận điều kiện đổi trả và liên hệ khách hàng trong vòng 3-5
+                ngày.
+              </li>
+              <li>
+                Hoàn tất đổi sản phẩm mới, gửi trả, hoặc hoàn tiền trong vòng
+                10-15 ngày từ ngày nhận được hàng.
+              </li>
+              <li>
+                Hoàn tiền sẽ được chuyển khoản hoặc trừ vào thẻ tín dụng tùy
+                theo phương thức thanh toán gốc.
+              </li>
             </ol>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Chi phí vận chuyển đổi trả do khách hàng chịu nếu lý do không phải lỗi từ phía chúng tôi. Nếu lỗi từ nhà sản xuất, chúng tôi sẽ hoàn trả chi phí vận chuyển.
+              Chi phí vận chuyển gửi lại trang sức đổi trả do khách hàng chịu
+              nếu lý do không phải lỗi từ phía chúng tôi. Nếu lỗi từ nhà sản
+              xuất, chúng tôi sẽ hoàn trả chi phí vận chuyển đôi chiều.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Chúng tôi cam kết xử lý nhanh chóng để giảm thiểu bất tiện cho khách hàng.
+              Chúng tôi khuyến nghị sử dụng dịch vụ gửi hàng có bảo hiểm để bảo
+              vệ trang sức trong quá trình vận chuyển.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">5. Các Trường Hợp Không Được Đổi Trả</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              5. Các Trường Hợp Không Được Đổi Trả
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Đổi trả không áp dụng cho:
+              Đổi trả trang sức không áp dụng cho:
             </p>
             <ul className="list-disc list-inside text-gray-700 leading-relaxed mb-4">
-              <li>Sản phẩm đã sử dụng hoặc hư hỏng do khách hàng.</li>
-              <li>Sản phẩm giảm giá mạnh hoặc hàng thanh lý.</li>
-              <li>Sản phẩm vệ sinh cá nhân, thực phẩm, hoặc hàng dễ hỏng.</li>
-              <li>Sản phẩm hết thời hạn đổi trả.</li>
-              <li>Không có hóa đơn hoặc bằng chứng mua hàng.</li>
-              <li>Sản phẩm bị mất phụ kiện hoặc bao bì gốc.</li>
-              <li>Các sản phẩm được đánh dấu "Không đổi trả" trên mô tả.</li>
+              <li>
+                Trang sức đã được đeo sử dụng hoặc có dấu hiệu sử dụng (xước,
+                mòn, bẩn).
+              </li>
+              <li>
+                Trang sức bị hư hỏng do rơi rớm, va chạm, hoặc tiếp xúc với hóa
+                chất do khách hàng.
+              </li>
+              <li>
+                Trang sức đã bị sửa chữa hoặc can thiệp bởi bên thứ ba không
+                được ủy quyền.
+              </li>
+              <li>Trang sức hết thời hạn đổi trả quy định.</li>
+              <li>Không có hóa đơn, mã đơn hàng, hoặc chứng chỉ xác thực.</li>
+              <li>
+                Trang sức bị mất phụ kiện, hộp, chứng chỉ, dây/móc kèm theo.
+              </li>
+              <li>
+                Sản phẩm custom (thiết kế theo yêu cầu) không được đổi trả nếu
+                lỗi từ khách hàng.
+              </li>
+              <li>
+                Trang sức được mua từ các bên thứ ba, không phải từ cửa hàng
+                chính thức của chúng tôi.
+              </li>
             </ul>
             <p className="text-gray-700 leading-relaxed">
-              Chúng tôi khuyến nghị khách hàng kiểm tra kỹ trước khi mua để tránh các trường hợp này.
+              Chúng tôi khuyến nghị khách hàng kiểm tra kỹ trang sức trước khi
+              nhận, lưu hộp và chứng chỉ ban đầu để thuận tiện cho việc đổi trả
+              nếu cần thiết.
             </p>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">6. Liên Hệ Hỗ Trợ</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              6. Liên Hệ Hỗ Trợ
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Để được hỗ trợ đổi trả, vui lòng liên hệ:
+              Để được hỗ trợ đổi trả trang sức, vui lòng liên hệ:
             </p>
             <ul className="list-disc list-inside text-gray-700 leading-relaxed">
-              <li>Hotline: 1800-789-012 (miễn phí)</li>
-              <li>Email: returns@company.com</li>
-              <li>Website: www.company.com/doi-tra</li>
-              <li>Địa chỉ kho hàng: 456 Đường XYZ, Quận 2, TP. HCM</li>
+              <li>Hotline: 1800-789-012 (miễn phí, mở cửa từ 8:00 - 21:00)</li>
+              <li>Email: returns@jewelry-company.com</li>
+              <li>Website: www.jewelry-company.com/doi-tra-hang</li>
+              <li>
+                Địa chỉ nhận hàng đổi trả: 456 Đường Nguyễn Huệ, Quận 1, TP. HCM
+              </li>
+              <li>Chat trực tuyến: Available on our website 24/7</li>
             </ul>
             <p className="text-gray-700 leading-relaxed mt-4">
-              Đội ngũ của chúng tôi sẽ hỗ trợ bạn một cách nhanh chóng và chuyên nghiệp.
+              Đội ngũ chuyên gia trang sức của chúng tôi sẽ hỗ trợ bạn một cách
+              nhanh chóng, chuyên nghiệp và tận tâm.
             </p>
           </section>
         </div>

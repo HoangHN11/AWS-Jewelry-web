@@ -79,7 +79,7 @@ export default function HomePage() {
             tuyển chọn kỹ lưỡng với chất liệu và chế tác hoàn hảo.
           </p>
           <Link
-            to="/product"
+            to="/products"
             className="inline-block px-6 py-3 bg-gold text-black rounded-md font-medium"
           >
             Khám phá sản phẩm
