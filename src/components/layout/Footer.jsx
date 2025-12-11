@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h5 className="font-bold text-gray-900 mb-2 text-sm">Sản Phẩm</h5>
-            <ul className="text-xs space-y-1">
+            <ul className="text-xs space-y-3">
               <li>
                 <Link
                   to="/products"
@@ -62,7 +62,7 @@ export default function Footer() {
           {/* Support & Policies */}
           <div>
             <h5 className="font-bold text-gray-900 mb-2 text-sm">Hỗ Trợ</h5>
-            <ul className="text-xs space-y-1">
+            <ul className="text-xs space-y-3">
               <li>
                 <Link
                   to="/policies/warranty"
@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Contact Section */}
           <div>
             <h5 className="font-bold text-gray-900 mb-2 text-sm">Liên Hệ</h5>
-            <div className="space-y-1">
+            <div className="space-y-3">
               <div>
                 <div className="text-xs text-gray-500 font-medium">Hotline</div>
                 <a
